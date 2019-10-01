@@ -1,22 +1,36 @@
 //Creating the Folder Structure
 
 Minutes of Meeting:
+
 The very first group discussion about the project was done on 29th September 2019. In this meeting every member of the group proposed 
 one topic for the project such as Booking reservations system, Shopping cart, Pharmacy portal and Virtual Discussion on Web. 
 After 30 minutes of the discussion two topics were finalized namely Online Pharmacy portal and Booking Reservation System. 
 The two topics that were finalized were given to the Instructor. The Instructor suggested and finalized the Online Pharmacy portal. 
-
 
 The second meeting was done on 3 September 2019 and lasted for 45 minutes. 
 In this meeting very important features of the project such as in which platform the project needs to be done, the total number of Webpages that are need to be created, the frontend and the backend. 
 Finally, after taking in point all the views of the group members some important features were fixed namely the Languages to be used- PHP, Bootstrap, CSS, SQL, HTML and the Server Used; XAMPP and the Development Environment – Visual Studio Code.
 The responsibilities of each and every member of the group were also fixed.
 
-
-
-
 The third meeting was done on 5th September 2019 and lasted for no longer than 45 minutes. In this discussion the very important topic discussed was the choice of project management tool. 
 At the end of the discussion it was finalized that the Project Management tool to be used is RedBooth. 
 After that there was a discussion what are the benefits and risks of the Project. 
 Why the project should be used and what are the features present in the project that makes it different and interesting compared to other online Pharmacy portals. 
 The risk management issues were also discussed in the meeting. The discussion ended with the idea of when to complete the deliverable 1.
+
+The fourth meeting was done on September 19 in the class. This was set up by the instructor. The instructor divided the whole class into a group of two teams each whose projects were similar.
+Since our project was an Online Pharmacy store, Instructor set up a discussion with the Hospital Management system project members. The main goal of this meeting is peer Evaluation. 
+The one team needs to explain their project features, Modules, requirements, how are they going to implement, frontend and backend, etc. Each team will be given 25 minutes to explain their project. 
+After the two teams explain the project to the opposite teams. Now each team members exchange their roles with the opposite team and try to suggest the problems they are facing to the opposite team at the end of the discussion. They can also mention the points they like as well. 
+This process took another 40 minutes. The whole process took 1hr 30 minutes. This meeting was so helpful as we got to know what must be changed in our project to make it more effective.
+	  
+ The fifth meeting was done on September 24 at the end of the class. This lasted for 30 minutes. 
+ The main point of the discussion is about deliverable 2. We discussed the things that are to be done in the deliverable 2 and Which part should be done by whom?. 
+ At the end of the discussion divided the whole deliverable 2 into four parts such as Introduction by the first member, Overall description by the second, System features and external Interface Requirements by the third and Non-Functional and other requirements by the fourth member.
+	
+ The sixth meeting was done on September 26 after the class. This lasted for about 45 minutes.
+ In this meeting, every member of the team raised their doubts in their respective work assigned. Discussed how to solve these issues.
+	  
+ The seventh meeting was done on October 1. It was about the final review of the deliverable 2 that need to be submitted. 
+  Discussed the documentation, pasting all the necessary screenshots and checking the size of the deliverable that should be no more than 15 pages. This lasted for 30 minutes.
+
