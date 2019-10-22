@@ -8,3 +8,13 @@ The details of the project folder Structure are as follows:
 3. Separate folders called Images is created to save all the images being used in the website.
 4. Separate folder called Documents has been created where we will find all the documentation(Deliverables) necessary.
 5. There is also a script folder to save the .js files.
+
+
+*************************** Date: 10/21/2019 11:50 p.m ***************************************
+To be able to install and run the web page, Be sure to have a working version of the Xampp control panel. 
+Save the folder SeEngg to the following path: c:/xampp/htdocs
+Then open xampp and start apache service and mysql service
+Next open browser and type the following url
+localhost:port_number/SwEngg/loginnew.php
+This should take you to the home page
+
