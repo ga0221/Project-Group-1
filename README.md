@@ -18,3 +18,7 @@ Next open browser and type the following url
 localhost:port_number/SwEngg/loginnew.php
 This should take you to the home page
 
+**************************** REFERENCES for Code till 10/21/2019  *******************************
+https://themeforest.net/category/site-templates/admin-templates?term=ecommerce%20html
+https://p.w3layouts.com/demos/june-2016/01-06-2016/big_store/web/login.html
+
