@@ -1,8 +1,7 @@
-// The orderdetails contains  productid, price, name, quantity, total price, the userid , orderdate . After the product is successfully added it is redirected to the userproductdetails which contains the details of the product such as the name of the product, productID given by the admin, the brand name of the product, the price of the product, the description for which it is used, the image of the product, the expiry date, if it is in over counter or not and the quantity in stock.
-<?php 
+<?php
     session_start();
 	//Checking if the user is logged in
-    if (!isset($_SESSION['id'])) {s
+    if (!isset($_SESSION['id'])) {
         header('location:loginnew.php');
         exit();
     }
@@ -26,7 +25,7 @@
 
                   $ProductID=$ID;
                   $price=$price;
-		 $prodName=$prodName;
+				  $prodName=$prodName;
                   $prodQty = $_POST['prodQty'];                                       
                   $total = $price * $prodQty;
                   $userId = $userId;
@@ -110,7 +109,7 @@
                             ?>
                         </a>
 		<div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="Order_details_User.php">View Orders</a>
+          <a class="dropdown-item" href="#">View Orders</a>
           <a class="dropdown-item" href="#">View Profile Information</a>
          <a class="dropdown-item" href="logout.php">Logout</a>
         </div>
@@ -123,8 +122,10 @@
   </div>
   </nav>    
     <!-- End Navbar -->
-
-	<br><br><br>
+     <br><br><br>
+<a class="btn btn-primary btn-round" href="Order_details_admin.php"><i class="now-ui-icons shopping_basket"></i> &nbsp Back to Orders</a>
+                      <hr color="orange"> 
+	<br>
 	<h1 align="Center"> Product Details</h1>
  
     <?php
@@ -184,20 +185,7 @@
                         </div>
 					</div>
 				</div>
-				<label><strong>Quantity:</strong></label>
-				<select size='1' width = '10' name="cartQty" id="cartQty" class='btn btn-success btn-round dropdown-toggle'/>
-				<?php 
-				$i=1;			
-				while ($i <= $cartQty ){
-                                echo "<option value=".$i.">".$i."</option>";
-                                $i++;
-                            }
-							?>
-				</select>
-				<br>
-            <button class="btn btn-success btn-round pull-right" name = "submit" type = "submit">
-                <i class="now-ui-icons shopping_cart-simple" ></i>Add To Cart
-			</button>
+				
 			<br><br>
         </div>	
         </div>  

@@ -76,6 +76,9 @@
     
 <div class="container">
 <br><br><br>
+<a class="btn btn-primary btn-round" href="Order_details_admin.php"><i class="now-ui-icons shopping_basket"></i> &nbsp Back to Orders</a>
+                      <hr color="orange"> 
+<br>
 <h1 align="Center"> Product Details</h1>
  
                <?php
@@ -88,6 +91,7 @@
     
 ?>   
   <div class="row"> 
+  <div class="col-sm-4"></div>
  <div class="col-sm-4">			
   <div class="card-columns">
                 <div class="card" style = "width: 30rem; margin:0 auto; " >
@@ -107,13 +111,14 @@
 							  <ul><strong class="card-title">Featured Image (Y/N):</strong><?php echo $res['Featured_Flag']; ?></ul>
 							  <ul><strong class="card-title">Quantity In stock:</strong> <?php echo $res['NumberInStock']; ?></ul>
 							  <ul><strong class="card-title">Expiry Date:</strong> <?php echo $res['ExpiryDate']; ?></ul>
-							  <ul><?php echo "<a href=\"product_update.php?ID=$res[ID]\">Edit Product Details</a>"; }?></ul>
                             </div>
 							</div>
 							</div>
 							</div>
 						
                  </div>
+				 <?php
+	}  ?>
 				</div> 
 	
 	

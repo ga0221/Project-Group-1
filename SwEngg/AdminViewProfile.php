@@ -19,7 +19,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="app new2.css">
 
-    <title>View Product Details</title>
+    <title>View Profile</title>
 
 </head>
 
@@ -41,6 +41,7 @@
       </li>
 	  
 	 <li class="nav-item">
+	    <!--Redirect to the inventory page -->
         <a class="nav-link" href="inventory.php">Inventory</a>
       </li>
 	   <li class="nav-item">
@@ -50,7 +51,6 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="now-ui-icons users_circle-08"></i>
                             <?php
-							    //Fetching user details
                                 include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
 								$query=mysqli_query($dbConnection,"SELECT * FROM `admindetails` WHERE AdminId='".$_SESSION['id']."'");
 								$row=mysqli_fetch_assoc($query);
@@ -72,42 +72,39 @@
     
   </div>
       
-    </nav>
+    </nav> 
     
 <div class="container">
 <br><br><br>
-<h1 align="Center"> Product Details</h1>
+<h1 align="Center"> Admin Profile</h1>
  
-               <?php
+ 
+                      &nbsp &nbsp  <center><a href='AdminPage.php' class='btn btn-success btn-round'>Back to Index</a></center>
+                <br>
+   <?php
     include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
-    $ID=$_GET['ID'];
-	//Fetching product details to be viewed
-    $query = "SELECT * FROM products WHERE ID='$ID'";
+    $ID = $_SESSION['id'];
+	//Fetching User details to be viewed
+    $query = "SELECT * FROM admindetails WHERE AdminId='$ID'";
     $result = mysqli_query($dbConnection,$query);
     while($res = mysqli_fetch_array($result)) {  
     
 ?>   
   <div class="row"> 
+  
+  <div class="col-sm-4"></div>
  <div class="col-sm-4">			
   <div class="card-columns">
-                <div class="card" style = "width: 30rem; margin:0 auto; " >
-                                 <?php if($res['productImage'] != ""): ?>
-                            <img class="card-img-top" src="/SwEngg/upload/<?php echo $res['productImage']; ?>" alt="prodImage"  Style = "width:100%">
-                            <?php else: ?>
-                            <img class="card-img-top" src="/SwEngg/upload/default.jpg" alt="prodImage" class="center" Style = "width:100%">
-                            <?php endif; ?>
+				
+                <div class="card" style = "width: 25rem;  display:inline block" >
                           <div class="card-body">
 							<!--Display all the details-->
-                              <ul><strong class="card-title">Product Name: </strong><?php echo $res['ProductName'];?></ul>
-                             <ul><strong class="card-text">ID:</strong><?php echo $res['ID']; ?></ul>
-		                       <ul> <strong class="card-text">Product Brand:</strong> <?php echo $res['CompanyName']; ?> </ul>
-					          <ul><strong class="card-title">Price:</strong> <?php echo $res['Price']; ?></ul>
-                              <ul><strong class="card-title">Cure For:</strong> <?php echo $res['CureFor']; ?></ul>
-							  <ul><strong class="card-title">Over The Counter or Not:</strong><?php echo $res['OtcFlag']; ?> </ul>
-							  <ul><strong class="card-title">Featured Image (Y/N):</strong><?php echo $res['Featured_Flag']; ?></ul>
-							  <ul><strong class="card-title">Quantity In stock:</strong> <?php echo $res['NumberInStock']; ?></ul>
-							  <ul><strong class="card-title">Expiry Date:</strong> <?php echo $res['ExpiryDate']; ?></ul>
-							  <ul><?php echo "<a href=\"product_update.php?ID=$res[ID]\">Edit Product Details</a>"; }?></ul>
+							  <ul><strong class="card-text">Admin ID:</strong><?php echo $res['AdminId']; ?></ul>
+                              <ul><strong class="card-title">First Name: </strong><?php echo $res['FirstName'];?></ul>
+		                      <ul> <strong class="card-text">Last Name:</strong> <?php echo $res['LastName']; ?> </ul>
+                              <ul><strong class="card-title">Age:</strong> <?php echo $res['Age']; ?></ul>
+							  <ul><strong class="card-title">Password:</strong><input type="password" value="<?php echo $res['Password'];?>" readonly> </ul>
+							  <ul><button type="submit" class="btn btn-success btn-round" id="submit" name="update"><?php echo "<a href=\"Admin_profile_update.php?AdminId=$ID\">Edit Profile</a>"; }?></button></ul>
                             </div>
 							</div>
 							</div>
