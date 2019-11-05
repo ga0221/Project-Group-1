@@ -21,7 +21,7 @@ include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
 
 <body>
 
-//Navbar
+<!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
   <a class="navbar-brand" id="logo" href="loginnew.php">Med-Anytime</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

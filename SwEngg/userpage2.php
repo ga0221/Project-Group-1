@@ -1,6 +1,7 @@
 
 <?php
     session_start();
+	//Checking if the user is logged in
     if (!isset($_SESSION['id'])) {
         header('location:loginnew.php');
         exit();
@@ -35,22 +36,23 @@
     <ul class="navbar-nav mr-auto">
      
       <li class="nav-item">
-         <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-3" type="search" placeholder="Search" id="navBarSearchForm" aria-label="Search">
-      <button class="btn btn-success my-2 my-sm-0" type="submit" id="SearchButton" >Search</button>
-    </form>
+      <form method="POST" action="UserProductSearch.php" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-3" type="search" placeholder="Search" name="search" id="navBarSearchForm" aria-label="Search">
+      <button class="btn btn-success my-2 my-sm-0" type="submit" name = "SearchButton" id="SearchButton">Search</button>
+      </form>
       </li>
 	 
 	   <li class="nav-item">
         <a class="nav-link" href="UserProducts.php">Products</a>
       </li>
 	    <li class="nav-item">
-        <a class="nav-link" href="#">Cart</a>
+        <a class="nav-link" href="CartDetails.php">Cart</a>
       </li>
 	  <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="now-ui-icons users_circle-08"></i>
                             <?php
+								 //Checking for user details to diplay on the nav bar
                                  include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
                                  $query=mysqli_query($dbConnection,"SELECT * FROM `userdetails` WHERE UserId='".$_SESSION['id']."'");
                                  $row=mysqli_fetch_assoc($query);
@@ -58,8 +60,9 @@
                             ?>
                         </a>
 						<div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">View Orders</a>
-          <a class="dropdown-item" href="#">View Profile Information</a>
+          <a class="dropdown-item" href="Order_details_User.php">View Orders</a>
+          <?php echo "<a class=\"dropdown-item\" href=\"ViewProfile.php?ID=".$row['ID']."\">View Profile</a>"; ?>
+		  
          <a class="dropdown-item" href="logout.php">Logout</a>
         </div>
       
@@ -72,7 +75,7 @@
   </nav>    
  <div class="image">
 </div>
-
+    <!--Footer of the page -->
 	<section class="bg-light">
 			<div class="container">
 				<div class="row justify-content-center ">
@@ -113,20 +116,22 @@
   <h1 align="center"> Featured Products </h1>
   <div class="row">
                <?php
+			            // Fetching the featured products from the database
                         $query = "SELECT * FROM products WHERE Featured_Flag = 'Y'";
                         $result = mysqli_query($dbConnection,$query);
                         while($res = mysqli_fetch_assoc($result)) {  
                             $ID=$res['ID'];
                     ?>  
-     <?php if($res['ID'] != ""): ?>
- <div class="col-sm-4">			
-  <div class="card-columns">
-                <div class="card" style = "width: 22rem; " >
+					<?php if($res['ID'] != ""): ?>
+							<div class="col-sm-4">			
+							<div class="card-columns">
+							<div class="card" style = "width: 22rem; " >
+							<!--Displaying all the featured products in a loop -->
                                 <img  class="card-img-top" src="/SwEngg/upload/<?php echo $res['productImage']; ?>" width="300px" height="200px">
                                 <?php else: ?>
                                 <img  src="/uploads/default.png" width="300px" height="200px">
                                 <?php endif; ?>
-                          <div class="card-body">
+							<div class="card-body">
                               <h5 class="card-title"><b><?php echo $res['ProductName'];?></b></h5>
                               <h6><a class="card-text btn btn-success btn-round" title="Click for more details!" href="userProductDetails.php?ID=<?php echo $res['ID'];?>"><i class="now-ui-icons gestures_tap-01"></i>View</a>
 							  <strong class="card-text"><span style="float:right;">Price: <?php echo $res['Price']; ?></span></strong></h6>
@@ -136,14 +141,11 @@
 							</div>
 						
                     <?php }?> 
-
-  
                 </div>
 				               </div>   
 
         
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

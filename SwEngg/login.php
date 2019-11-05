@@ -1,11 +1,11 @@
 <?php
-
+session_start();
 class login
 {
     
-    function login()
+    function loginNew()
     {
-        session_start();
+        
 		//Include the Database connectivity File
         include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
         
@@ -23,7 +23,7 @@ class login
 			//Encrypting password using md5
             $pass = md5($pass1);
             $salt = "a1Bz20ydqelm8m1wql";
-            $pass = $salt . $pass;
+            $pass = $salt.$pass;
             
             
             //Checking if the credentials belong to admin or user
@@ -33,7 +33,7 @@ class login
             $query1 = mysqli_query($dbConnection, "SELECT * FROM `userdetails` WHERE UserId='$user'");
             $res1   = mysqli_fetch_assoc($query1);
             $id1    = $res1['UserId'];
-            
+			
 			//Validations for incorrect details
             if (!(mysqli_num_rows($query) <= 0)) {
                 $pass2 = $res['Password'];
@@ -65,6 +65,46 @@ class login
             }
             
         }
+		
+		function loginNewTest()
+		{
+			
+			//Include the Database connectivity File
+			include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
+			
+			error_reporting(E_ALL);
+			ini_set('display_errors', '1');
+			
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				$user_unsafe = $_POST['username'];
+				$pass_unsafe = $_POST['password'];
+				
+				//Formatting the userame and password for using them in the MySQL query
+				$user  = mysqli_real_escape_string($dbConnection, $user_unsafe);
+				$pass1 = mysqli_real_escape_string($dbConnection, $pass_unsafe);
+				
+				//Encrypting password using md5
+				$pass = md5($pass1);
+				$salt = "a1Bz20ydqelm8m1wql";
+				$pass = $salt . $pass;
+				
+				
+				//Checking if the credentials belong to admin or user
+				$query  = mysqli_query($dbConnection, "SELECT * FROM `admindetails` WHERE AdminId='$user' and Password = '$pass'");
+				$res    = mysqli_fetch_assoc($query);
+				$id     = $res['AdminId'];
+				$query1 = mysqli_query($dbConnection, "SELECT * FROM `userdetails` WHERE UserId='$user' and Password = '$pass'");
+				$res1   = mysqli_fetch_assoc($query1);
+				$id1    = $res1['UserId'];
+				
+				if (mysqli_num_rows($query) == 1 || mysqli_num_rows($query1) == 1){
+					return true;
+				}
+				else
+					return false;
+				
+			}
+		}
         
         
     }
@@ -72,7 +112,7 @@ class login
 $log = new login;
 
 //Calling the login function using a class object
-$log.login();
+$log->loginNew();
 
 
 

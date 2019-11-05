@@ -1,9 +1,9 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['id'])) {
-        header('location:loginnew.php');
-        exit();
-    }
+session_start();
+if (!isset($_SESSION['id'])) {
+    header('location:loginnew.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,150 +25,151 @@
 
 <body class="index-page sidebar-collapse">
 
-    <!-- End Navbar -->
     <div class="wrapper">
 
-<br>
+	<br>
         <div class="main">
             <div class="section section-basic">
                 <div class="container">
                       <h2>New Products</h2>
                       <br>
                       <a href='AdminPage.php' class='btn btn-success btn-round'>Back to Index</a>
-					  <br>
+                      <br>
                 <br>
                 <div class="col-md-12">
-               
+              
 
-<?php
-// including the database connection file
-include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
-if(isset($_POST['submit'])){
+		<?php
+		class productAdd{
+			
+			function saveProduct(){
+				
+				// including the database connection file
+				include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
+				error_reporting(E_ALL);
+				ini_set('display_errors', '1');
+				if (isset($_POST['submit'])) {
+					
+					$prod_name    = $_POST['prod_name'];
+					$comp_name    = $_POST['comp_name'];
+					$price        = $_POST['price'];
+					$cureFor      = $_POST['cureFor'];
+					$otcFlag      = $_POST['otcFlag'];
+					$quantity     = $_POST['quantity'];
+					$expDate      = $_POST['expDate'];
+					$featuredFlag = $_POST['featuredFlag'];
+					//Uploading image for the product in a server folder
+					move_uploaded_file($_FILES["prodImage"]["tmp_name"], "C:/xampp/htdocs/SwEngg/upload/" . $_FILES["prodImage"]["name"]);
+					$prodImage = $_FILES["prodImage"]["name"];
+					
+					//Checking if the product already exists
+					$chkquery = mysqli_query($dbConnection, "SELECT * FROM `products` WHERE ProductName='$prod_name'");
+					$res      = mysqli_fetch_assoc($chkquery);
+					
+					// checking empty fields
+					if (empty($prod_name) || empty($comp_name) || empty($price) || empty($cureFor) || empty($otcFlag) || empty($quantity) || empty($expDate) || empty($prodImage)) {
+						
+						if (empty($prod_name)) {
+							echo "<font color='red'>Product name field is empty!</font><br/>";
+						}
+						
+						if (empty($comp_name)) {
+							echo "<font color='red'>Brand name field is empty!</font><br/>";
+						}
+						
+						if (empty($price)) {
+							echo "<font color='red'>Price field is empty!</font><br/>";
+						}
+						
+						if (empty($cureFor)) {
+							echo "<font color='red'>Product cure for field is empty!</font><br/>";
+						}
+						
+						if (empty($otcFlag)) {
+							echo "<font color='red'>Over the counter flag is empty!</font><br/>";
+						}
+						
+						if (empty($quantity)) {
+							echo "<font color='red'>Quantity in stock field is empty!</font><br/>";
+						}
+						
+						if (empty($expDate)) {
+							echo "<font color='red'>Expiry Date field is empty!</font><br/>";
+						}
+						
+						if (empty($prodImage)) {
+							echo "<font color='red'>Product Image field is empty!</font><br/>";
+						}
+						if (empty($featuredFlag)) {
+							echo "<font color='red'>Featured image or No field is empty!</font><br/>";
+						}
+						return 1;
+						
+					} else if (!(mysqli_num_rows($chkquery) <= 0)) {
+						echo "The product already exists. Please update it.";
+						return 2;
+					}
+					
+					else {
+						//Inserting new product into database
+						$query = "INSERT INTO products (ProductName, CompanyName, CureFor, Price, OtcFlag, ExpiryDate, NumberInStock, productImage, Featured_Flag) 
+						VALUES ('$prod_name','$comp_name','$cureFor','$price','$otcFlag','$expDate','$quantity','$prodImage','$featuredFlag')";
+						
+						$result = mysqli_query($dbConnection, $query);
+						return 3;
+						
+					}
+				}				
+				
+			}
+		}
+		$pr = new productAdd;
+		$pr->saveProduct();
+		 
+		?>
 
-    $prod_name=$_POST['prod_name'];
-    $comp_name=$_POST['comp_name'];
-    $price=$_POST['price'];
-    $cureFor=$_POST['cureFor'];
-    $otcFlag=$_POST['otcFlag'];
-    $quantity=$_POST['quantity'];
-    $expDate=$_POST['expDate'];
-	$featuredFlag = $_POST['featuredFlag'];
-	move_uploaded_file($_FILES["prodImage"]["tmp_name"],"C:/xampp/htdocs/SwEngg/upload/" . $_FILES["prodImage"]["name"]);         
-    $prodImage=$_FILES["prodImage"]["name"];
-	
-	$chkquery=mysqli_query($dbConnection,"SELECT * FROM `products` WHERE ProductName='$prod_name'");
-	$res=mysqli_fetch_assoc($chkquery);
-	
-	/*if (!empty($otcFlag) && $otcFlag == 1){
-		$otcFlag = 'Y';
-	}
-	else{
-		$otcFlag = 'N';
-	}*/
-
-     // checking empty fields
-    if(empty($prod_name) || empty($comp_name) || empty($price) || empty($cureFor) || empty($otcFlag) || empty($quantity) 
-        || empty($expDate) || empty($prodImage)){    
-            
-        if(empty($prod_name)) {
-            echo "<font color='red'>Product name field is empty!</font><br/>";
-        }
-        
-        if(empty($comp_name)) {
-            echo "<font color='red'>Brand name field is empty!</font><br/>";
-        }
-
-        if(empty($price)) {
-            echo "<font color='red'>Price field is empty!</font><br/>";
-        }   
-
-        if(empty($cureFor)) {
-            echo "<font color='red'>Product cure for field is empty!</font><br/>";
-        }   
-
-        if(empty($otcFlag)) {
-            echo "<font color='red'>Over the counter flag is empty!</font><br/>";
-        }  
-
-        if(empty($quantity)) {
-            echo "<font color='red'>Quantity in stock field is empty!</font><br/>";
-        } 
-
-        if(empty($expDate)) {
-            echo "<font color='red'>Expiry Date field is empty!</font><br/>";
-        }
-		
-		if(empty($prodImage)) {
-            echo "<font color='red'>Product Image field is empty!</font><br/>";
-        }
-		if(empty($featuredFlag)) {
-            echo "<font color='red'>Featured image or No field is empty!</font><br/>";
-        }
-
-    }
-	else if(!(mysqli_num_rows($chkquery) <= 0)){
-		echo "The product already exists. Please update it.";
-	}
-
-	else {    
-		
-
-        $query = "INSERT INTO products (ProductName, CompanyName, CureFor, Price, OtcFlag, ExpiryDate, NumberInStock, productImage, Featured_Flag) 
-        VALUES ('$prod_name','$comp_name','$cureFor','$price','$otcFlag','$expDate','$quantity','$prodImage','$featuredFlag')";  
-
-        $result = mysqli_query($dbConnection,$query);
-		//$result1 = mysqli_assoc($result);
-        
-    }
-}
-
-?>
 
 
+		<div class="panel panel-success panel-size-custom">
+				  <div class="panel-heading"><h3>Add New Product</h3></div>
+				  <!-- Fields to enter the new product details-->
+				  <div class="panel-body">
+					<form action="" method="post" enctype="multipart/form-data">
+						<div class="form group">
+							<label>Product Name:</label>
+							<input type="text" class="form-control" id="prod_name" name="prod_name" placeholder="Product Name"/>
+							<label>Company Name:</label>
+							<input type="text" class="form-control" id="comp_name" name="comp_name" placeholder="Product Brand"/>
+							<label>Price</label>
+							<input type="text" class="form-control" id="price" name="price" placeholder="Price"/>
+							<label>Cure For</label>
+							<input type="text" class="form-control" id="cureFor" name="cureFor" placeholder="Product Used For"/>
+							<label>Over The Counter or Not (Y/N):</label>
+							<input type="text" class="form-control" id="otcFlag" name="otcFlag" placeholder="Y/N"/>
+							<label>Featured Image (Y/N):</label>
+							<input type="text" class="form-control" id="featuredFlag" name="featuredFlag" placeholder="Y/N"/>
+							<label>Number in Stock:</label>
+							<input type="text" class="form-control" id="quantity" name="quantity" placeholder="Quantity"/>
+							<label>Expiry Date:</label>
+							<input type="date" class="form-control" id="expDate" name="expDate" />
+							<label>Product Image:</label>
+							<div class="input-group">
+								<input type="file" class="form-control" id="prodImage" name="prodImage">  
+							</div>
+						</div>
+						<br>
 
-<div class="panel panel-success panel-size-custom">
-          <div class="panel-heading"><h3>Add New Product</h3></div>
-
-          <div class="panel-body">
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="form group">
-                    <label>Product Name:</label>
-                    <input type="text" class="form-control" id="prod_name" name="prod_name" placeholder="Product Name"/>
-                    <label>Company Name:</label>
-                    <input type="text" class="form-control" id="comp_name" name="comp_name" placeholder="Product Brand"/>
-                    <label>Price</label>
-                    <input type="text" class="form-control" id="price" name="price" placeholder="Price"/>
-					<label>Cure For</label>
-                    <input type="text" class="form-control" id="cureFor" name="cureFor" placeholder="Product Used For"/>
-                    <label>Over The Counter or Not (Y/N):</label>
-                    <input type="text" class="form-control" id="otcFlag" name="otcFlag" placeholder="Y/N"/>
-					<label>Featured Image (Y/N):</label>
-                    <input type="text" class="form-control" id="featuredFlag" name="featuredFlag" placeholder="Y/N"/>
-                    <label>Number in Stock:</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Quantity"/>
-                    <label>Expiry Date:</label>
-                    <input type="date" class="form-control" id="expDate" name="expDate" />
-					<label>Product Image:</label>
-                    <div class="input-group">
-                        <input type="file" class="form-control" id="prodImage" name="prodImage">  
-                    </div>
-                </div>
-                <br>
-
-                <div class="form group">
-                    <button type="submit" class="btn btn-success btn-round" id="submit" name="submit">
-                    <i class="now-ui-icons ui-1_check"> Add Product</i> 
-                    </button> 
-                </div>
-            </form>
-          </div>
-        </div> 
-        <br> 
-    </div>
-</div>
-</div>
+						<div class="form group">
+							<button type="submit" class="btn btn-success btn-round" id="submit" name="submit">
+							<i class="now-ui-icons ui-1_check"> Add Product</i> 
+							</button> 
+						</div>
+					</form>
+				  </div>
+				</div> 
+				<br> 
+			</div>
 		</div>
+		</div>
+        </div>
 </body>
-
-
-</html>

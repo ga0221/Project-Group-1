@@ -30,17 +30,18 @@
     <ul class="navbar-nav mr-auto">
      
       <li class="nav-item">
-        <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-3" type="search" placeholder="Search" id="navBarSearchForm" aria-label="Search">
-      <button class="btn btn-success my-2 my-sm-0" type="submit" id="SearchButton" >Search</button>
-    </form>
+      <form method="POST" action="AdminProductSearch.php" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-3" type="search" placeholder="Search" name="search" id="navBarSearchForm" aria-label="Search">
+      <button class="btn btn-success my-2 my-sm-0" type="submit" name = "SearchButton" id="SearchButton">Search</button>
+      </form>
       </li>
 	  
 	 <li class="nav-item">
+	    <!--Redirect to the inventory page -->
         <a class="nav-link" href="inventory.php">Inventory</a>
       </li>
 	   <li class="nav-item">
-        <a class="nav-link" href="#">Cart</a>
+        <a class="nav-link" href="Order_details_admin.php">Orders</a>
       </li>  
        <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -54,7 +55,7 @@
                         </a>
 						<div class="dropdown-menu"  aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">View Orders</a>
-          <a class="dropdown-item" href="#">View Profile Information</a>
+          <a class="dropdown-item" href="AdminViewProfile.php">View Profile Information</a>
            <a class="dropdown-item" href="logout.php">Logout</a>
       
         </div>
@@ -82,11 +83,9 @@
                         <div class="panel-body">
 
                             <?php
+								    //Fetching all product details to be displayed in the inventory
                                       include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
                                       $action = isset($_GET['action']) ? $_GET['action'] : "";
-                                      if($action=='deleted'){
-                                          echo "<div class='alert alert-success'>No products in the database</div>";
-                                      }
                                       $query = "SELECT * FROM products ORDER BY NumberInStock ASC";
                                       $result = mysqli_query($dbConnection,$query);
 									  $result1=mysqli_fetch_assoc($result);
@@ -107,10 +106,9 @@
                                     </tr>
                                         <?php
                                           if($result1){
-											 // echo "check 1 '".$result1['ProductName']."'";
                                             while($res = mysqli_fetch_array($result)) {  
 												echo "<tr>";
-                                                
+                                                //Display details in the form of a table
                                                 echo "<td>".$res['ProductName']."</td>";
                                                 echo "<td>".$res['CompanyName']."</td>";  
                                                 echo "<td>".$res['CureFor']."</td>";

@@ -1,5 +1,6 @@
 <?php
     session_start();
+	//Checking if the user is logged in
     if (!isset($_SESSION['id'])) {
         header('location:loginnew.php');
         exit();
@@ -23,7 +24,7 @@
   </head>
   
   <body>
-
+  <!--Navbar-->
   <nav  class="navbar navbar-dark navbar-expand-md pt-0 pb-0 fixed-top">
       <a href="userpage2.php" class="navbar-brand">Med-AnyTime</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navmenu" aria-label="Toggle navigation">
@@ -33,22 +34,24 @@
     <ul class="navbar-nav mr-auto">
      
       <li class="nav-item">
-         <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-3" type="search" placeholder="Search" id="navBarSearchForm" aria-label="Search">
-      <button class="btn btn-success my-2 my-sm-0" type="submit" id="SearchButton" >Search</button>
-    </form>
+      <form method="POST" action="UserProductSearch.php" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-3" type="search" placeholder="Search" name="search" id="navBarSearchForm" aria-label="Search">
+      <button class="btn btn-success my-2 my-sm-0" type="submit" name = "SearchButton" id="SearchButton">Search</button>
+      </form>
       </li>
 	 
 	   <li class="nav-item">
+	   <!--Redirects to the same page-->
         <a class="nav-link" href="UserProducts.php">Products</a>
       </li>
 	    <li class="nav-item">
-        <a class="nav-link" href="#">Cart</a>
+        <a class="nav-link" href="CartDetails.php">Cart</a>
       </li>
 	  <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="now-ui-icons users_circle-08"></i>
                             <?php
+							     //Fetching user details
                                  include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
                                  $query=mysqli_query($dbConnection,"SELECT * FROM `userdetails` WHERE UserId='".$_SESSION['id']."'");
                                  $row=mysqli_fetch_assoc($query);
@@ -68,11 +71,13 @@
     
   </div>
   </nav>    
+  <br><br><br>
 <div class="container" id="UserProducts">
 <h1 align="Center"> Products </h1>
   <div class="row">
                <?php
-                        $query = "SELECT * FROM products";
+						//Fetching all product details
+                        $query = "SELECT * FROM products Order By NumberInStock ASC";
                         $result = mysqli_query($dbConnection,$query);
                         while($res = mysqli_fetch_assoc($result)) {  
                             $ID=$res['ID'];
@@ -99,6 +104,7 @@
   
                 </div>
 				               </div> 
+							   <br><br>
  <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

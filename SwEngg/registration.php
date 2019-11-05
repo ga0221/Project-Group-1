@@ -76,93 +76,126 @@ include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
           <button type="submit" name="submit" class="btn">Submit</button>
       </form>
       <?php
-	    //To calculate the age of users
-		function dateDifference($date_1, $date_2, $differenceFormat = '%y Year')
-		{
-			$datetime1 = date_create($date_1);
-			$datetime2 = date_create($date_2);
+		class registration{
 			
-			$interval = date_diff($datetime1, $datetime2);
+			//To calculate the age of users
+			public function dateDifference($date_1, $date_2, $differenceFormat = '%y Year')
+			{
+				$datetime1 = date_create($date_1);
+				$datetime2 = date_create($date_2);
+				$interval = date_diff($datetime1, $datetime2);
+				$interval = $interval->format($differenceFormat);
+				
+			}
 			
-			return $interval->format($differenceFormat);
+			public function save(){
+				
+				include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
+				if (isset($_POST['submit'])) { 
+				//Fetching all the values to be saved in the database
+				$firstname  = $_POST['firstname'];
+				$lastname   = $_POST['lastname'];
+				$username   = $_POST['username'];
+				//To check if it is an existing user
+				$chkquery   = mysqli_query($dbConnection, "SELECT * FROM `userdetails` WHERE UserId='$username'");
+				$res        = mysqli_fetch_assoc($chkquery);
+				$gender     = $_POST['gender'];
+				$DOB        = $_POST['DOB'];
+				//To calculate the age of the user
+				$date_2 = date("Y-m-d");
+				$differenceFormat = '%y Year';
+				$datetime1 = date_create($DOB);
+				$datetime2 = date_create($date_2);
+				$interval = date_diff($datetime1, $datetime2);
+				$interval = $interval->format($differenceFormat);
+				$DOB        = $_POST['DOB'];
+				$password   = $_POST['password'];
+				$terms      = $_POST['chkBox'];
+				//encrypting the password
+				$pass1 = md5($password);
+				$salt  = "a1Bz20ydqelm8m1wql";
+				$pass1 = $salt . $pass1;
+				$filename = $_POST["govtID"];
+				//upload stateID
+				
+				//Uploading stateID for the user in a server folder
+				//move_uploaded_file($_FILES["govtID"]["tmp_name"], "C:/xampp/htdocs/SwEngg/upload stateID/" . $_FILES["govtID"]["name"]);
+				//$filename = $_FILES["govtID"]["name"];
+				
+				// checking empty fields
+				if (empty($firstname) || empty($lastname) || empty($username) || empty($gender) || empty($password) || empty($filename) || empty($terms) || empty($DOB)) {
+					//echo "'".$pass1."'";
+					if (empty($firstname)) {
+						echo "<font color='red'>Firstname field is empty!</font><br/>";
+					}
+					
+					if (empty($lastname)) {
+						echo "<font color='red'>Lastname field is empty!</font><br/>";
+					}
+					
+					if (empty($gender)) {
+						echo "<font color='red'>Gender field is empty!</font><br/>";
+					}
+					
+					if (empty($DOB)) {
+						echo "<font color='red'>Date of Birth is empty!</font><br/>";
+					}
+					
+					if (empty($username)) {
+						echo "<font color='red'>Email field is empty!</font><br/>";
+					}
+					
+					if (empty($password)) {
+						echo "<font color='red'>Password field is empty!</font><br/>";
+					}
+					
+					if (empty($filename)) {
+						echo "<font color='red'>It is mandatory to upload any one valid government ID!</font><br/>";
+					}
+					
+					if (empty($terms)) {
+						echo "<font color='red'>Please check the box stating all the information you provided is valid.</font><br/>";
+					}
+					//For testing purpose
+					return 1;
+				} 
+				//Checking if the user already exists
+				else if (!(mysqli_num_rows($chkquery) <= 0)) {
+					echo "<font color='red'>That emailID is already in use.</font><br/>";
+					//For testing purpose
+					return 2;
+				}
+				//Checking if the age is less than 18
+				else if ($interval < 18) {
+					echo "<font color='red'>Age should be atleast 18 years.</font><br/>";
+					//For testing purpose
+					return 3;
+				}
+				
+				else {
+					//Inserting new user details
+					$query = "INSERT INTO userdetails (ID, UserID, FirstName, LastName, Password,Gender, GovtID,DateOfBirth) 
+											VALUES ('','$username','$firstname','$lastname','$pass1','$gender','$filename',$DOB)";
+					
+					$result = mysqli_query($dbConnection, $query);
+					//For testing sake
+					return 5;
+					if ($result) {
+						//header("Location: loginnew.php", true, 301);
+						//exit();
+					}
+					
+				}
+				
+			}
 			
 		}
-		if (isset($_POST['submit'])) { 
-			//Fetching all the values to be saved in the database
-			$firstname  = $_POST['firstname'];
-			$lastname   = $_POST['lastname'];
-			$username   = $_POST['username'];
-			//To check if it is an existing user
-			$chkquery   = mysqli_query($dbConnection, "SELECT * FROM `userdetails` WHERE UserId='$username'");
-			$res        = mysqli_fetch_assoc($chkquery);
-			$gender     = $_POST['gender'];
-			$DOB        = $_POST['DOB'];
-			//To calculate the age of the user
-			$difference = dateDifference($DOB, date("Y-m-d"));
-			$password   = $_POST['password'];
-			$terms      = $_POST['chkBox'];
-			//encrypting the password
-			$pass1 = md5($password);
-			$salt  = "a1Bz20ydqelm8m1wql";
-			$pass1 = $salt . $pass1;
-			$filename = $_POST["govtID"];
-    
-    
-			// checking empty fields
-			if (empty($firstname) || empty($lastname) || empty($username) || empty($gender) || empty($password) || empty($filename) || empty($terms) || empty($DOB)) {
-				//echo "'".$pass1."'";
-				if (empty($firstname)) {
-					echo "<font color='red'>Firstname field is empty!</font><br/>";
-				}
-				
-				if (empty($lastname)) {
-					echo "<font color='red'>Lastname field is empty!</font><br/>";
-				}
-				
-				if (empty($gender)) {
-					echo "<font color='red'>Gender field is empty!</font><br/>";
-				}
-				
-				if (empty($DOB)) {
-					echo "<font color='red'>Date of Birth is empty!</font><br/>";
-				}
-				
-				if (empty($username)) {
-					echo "<font color='red'>Email field is empty!</font><br/>";
-				}
-				
-				if (empty($password)) {
-					echo "<font color='red'>Password field is empty!</font><br/>";
-				}
-				
-				if (empty($filename)) {
-					echo "<font color='red'>It is mandatory to upload any one valid government ID!</font><br/>";
-				}
-				
-				if (empty($terms)) {
-					echo "<font color='red'>Please check the box stating all the information you provided is valid.</font><br/>";
-				}
-			} else if (!(mysqli_num_rows($chkquery) <= 0)) {
-				echo "<font color='red'>That emailID is already in use.</font><br/>";
-			}
-			
-			else if ($difference < 18) {
-				echo "<font color='red'>Age should be atleast 18 years.</font><br/>";
-			}
-			
-			else {
-				//updating the table
-				$query = "INSERT INTO userdetails (ID, UserID, FirstName, LastName, Password, GovtID,DateOfBirth) 
-										VALUES ('','$username','$firstname','$lastname','$pass1','$filename',$DOB)";
-				
-				$result = mysqli_query($dbConnection, $query);
-				
-				if ($result) {
-					header("Location: loginnew.php", true, 301);
-					exit();
-				}
-			}
+		
 }
+
+$reg = new registration;
+$reg->save();
+//Clering the POST request variable
 unset($_POST['submit']);
 ?>
      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
