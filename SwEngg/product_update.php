@@ -56,14 +56,14 @@ class product_update{
 				if (empty($FeaturedFlag)) {
 					echo "<font color='red'>Product featured flag field is empty!</font><br/>";
 				}
-				return 1;
+				//return 1;
 				
 			} else {
 				//updating the table
 				$query  = "UPDATE products SET ProductName='$ProductName',CompanyName='$CompanyName',CureFor='$CureFor',Price='$Price',OtcFlag='$OtcFlag',
 						ExpiryDate='$ExpiryDate',NumberInStock='$quantity',Featured_Flag='$FeaturedFlag' WHERE ID=$id";
 				$result = mysqli_query($dbConnection, $query);
-				return 2;
+				//return 2;
 				if ($result) {
 					//redirecting to the display page.
 					header("Location: inventory.php");

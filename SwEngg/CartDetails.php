@@ -1,4 +1,4 @@
-// The cart details contains the products added and the description of the products.The cart details contain the total number of the products, the price of each product, the total price of all the prodcts and can also update the quantity of products. There is a navigation bar where the user can view the orders, view the profile information and the logout option.
+<!-- The cart details contains the products added and the description of the products.The cart details contain the total number of the products, the price of each product, the total price of all the prodcts and can also update the quantity of products. There is a navigation bar where the user can view the orders, view the profile information and the logout option.-->
 <?php
     session_start();
     

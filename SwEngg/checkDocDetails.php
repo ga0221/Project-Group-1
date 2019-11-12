@@ -1,4 +1,4 @@
-//checking the doctor details
+<!--//checking the doctor details-->
 
 <?php
     session_start();
@@ -19,10 +19,44 @@
 				$dName = $_POST['dName'];
 				$dNPINum = $_POST['dNPINum'];
 				$dEmailId = $_POST['dEmailId'];
-				$prescription = $_POST["prescription"];
+				//$prescription = $_POST["prescription"];
+
+				$fileinfo = @getimagesize($_FILES["prescription"]["tmp_name"]);
+				$width = $fileinfo[0];
+				$height = $fileinfo[1];
+				
+				$allowed_image_extension = array(
+					"png",
+					"jpg",
+					"jpeg"
+				);
+		
+				move_uploaded_file($_FILES["prescription"]["tmp_name"], "C:/xampp/htdocs/SwEngg/Prescriptions/" . $_FILES["prescription"]["name"]);
+				$prescription = $_FILES["prescription"]["name"];
 				$UserId = $_SESSION['id'];
+				
+				// Get image file extension
+				$file_extension = pathinfo($_FILES["prescription"]["name"], PATHINFO_EXTENSION);
+				
+				// Validate file input to check if is with valid extension
+				if (! in_array($file_extension, $allowed_image_extension)) {
+					$response = array(
+						"type" => "error",
+						$_SESSION['msg'] = "Address Saved!",
+						$_SESSION['msg1'] = "Upload valid images. Only PNG and JPEG are allowed.",
+						header("Location: checkForOtc.php", true, 301)
+					);
+				}    // Validate image file size
+				else if (($_FILES["file-input"]["size"] > 2000000)) {
+					$response = array(
+						"type" => "error",
+						$_SESSION['msg'] = "Address Saved!",
+						$_SESSION['msg1'] = "Image size exceeds 2MB",
+						header("Location: checkForOtc.php", true, 301)
+					);
+				}
 				// checking empty fields
-				if (empty($dName) || empty($dNPINum) || empty($prescription) || empty($dEmailId) || empty($UserId)) {
+				else if (empty($dName) || empty($dNPINum) || empty($prescription) || empty($dEmailId) || empty($UserId)) {
 					
 					if (empty($dName)) {
 						$_SESSION['msg'] = "Address Saved!";
@@ -41,6 +75,8 @@
 					
 					//For testing purpose
 					//return 1;
+					header("Location: checkForOtc.php", true, 301);
+					exit();
 				} 
 				
 				else {
@@ -53,9 +89,10 @@
 						//For testing purpose
 						//return 2;
 						header("Location: checkForOtc.php", true, 301);
+						exit();
 					}
 					else{
-						$updtResult = mysqli_query($dbConnection, "UPDATE `order details` SET docEmailId='$dEmailId' , docNPInum='$dNPINum' WHERE UserID='$UserId' AND OrderStatus='Cart' AND OtcFlag='N'");
+						$updtResult = mysqli_query($dbConnection, "UPDATE `order details` SET docEmailId='$dEmailId' , docNPInum='$dNPINum',docPrescription='$prescription' WHERE UserID='$UserId' AND OrderStatus='Cart' AND OtcFlag='N'");
 						if($updtResult){
 							//For testing purpose
 							//return 3;

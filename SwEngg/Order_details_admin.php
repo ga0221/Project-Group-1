@@ -140,7 +140,7 @@
                   <td><br><?php echo $row['TotalPrice'];?></td>
 				  <td><br><?php echo $row['UserID'];?></td>
                   <td>
-                  <a href="view_Order_products_admins.php?ID=<?php echo $row['ProductID'];?>"><button class="btn btn-success btn-round" type="button"> View this item </button></a>				  
+                  <a href="view_Order_products_admins.php?ID=<?php echo $row['ProductID'];?>&UID=<?php echo $row['UserID'];?>&OID=<?php echo $row['OrderID'];?>"><button class="btn btn-success btn-round" type="button"> View this item </button></a>				  
 				  <td>
 				  <a href="cancel_order_details_admin.php?orderID=<?php echo $row['OrderID'];?>" ><button class="btn btn-danger btn-round" onclick="return confirm('Are you sure you want to cancel?')" type="button">Cancel this item</button></a>
 				  </td>

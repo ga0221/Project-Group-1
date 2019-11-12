@@ -1,6 +1,6 @@
-// This page allows the admin to edit the admin account details for a successful login. Allows for editing Firstname, Lastname, Date of birth, password
+<!--This page allows the admin to edit the admin account details for a successful login. Allows for editing Firstname, Lastname, Date of birth, password
 
-//php session start
+//php session start-->
 <?php
 session_start();
 if (!isset($_SESSION['id'])) {
@@ -86,7 +86,7 @@ while($res = mysqli_fetch_array($result))
     $Password = $res['Password'];
 }
 ?>
-//html code for the User Interface of Admin_profile_update.php page
+<!--html code for the User Interface of Admin_profile_update.php page-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,7 +122,7 @@ while($res = mysqli_fetch_array($result))
   <div class="panel-heading"><h3>Update Profile</h3></div>
   <div class="panel-body">
 
-//getting the admin profile details using post method
+<!--getting the admin profile details using post method-->
     <form method="post">
         <div class="form group">
             <input type="hidden" class="form-control" id="ID" name="ID" value=<?php echo $_GET['AdminId'];?>>

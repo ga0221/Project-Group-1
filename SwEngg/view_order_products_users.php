@@ -123,7 +123,7 @@
   </nav>    
     <!-- End Navbar -->
      <br><br><br>
-<a class="btn btn-primary btn-round" href="Order_details_admin.php"><i class="now-ui-icons shopping_basket"></i> &nbsp Back to Orders</a>
+<a class="btn btn-primary btn-round" href="Order_details_User.php"><i class="now-ui-icons shopping_basket"></i> &nbsp Back to Orders</a>
                       <hr color="orange"> 
 	<br>
 	<h1 align="Center"> Product Details</h1>
@@ -132,56 +132,64 @@
 		//Fetching all the products to be displayed
 		include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
 		$ID=$_GET['ID'];
-		$query = "SELECT * FROM products WHERE ID='$ID'";
+		$status = $_GET['Status'];
+		$query = "SELECT * FROM `order details` WHERE ProductID='$ID' AND UserID='".$_SESSION['id']."' AND OrderStatus = '$status'";
 		$result = mysqli_query($dbConnection,$query);
+		$query1 = "SELECT * FROM products WHERE ID='$ID'";
+		$result1 = mysqli_query($dbConnection,$query1);
 		while($res = mysqli_fetch_array($result)) {  
+			$res1 = mysqli_fetch_assoc($result1);
 	?>  
 	
 <form class = "form" method ="POST" action="addToCart.php">	
    
   <div class="row"> 
 	<div class="col-sm-4">
-	<?php echo "<input type =\"hidden\" name = \"ProductId\" value =".$res['ID'].">"; ?>
+	<?php echo "<input type =\"hidden\" name = \"ProductId\" value =".$res1['ID'].">"; ?>
 	</div>
 	
 		<div class="col-sm-4">			
 			<div class="card-columns">
                 <div class="card" style = "width: 25rem;" >
-                                 <?php if($res['productImage'] != ""): ?>
-                            <img class="card-img-top" src="/SwEngg/upload/<?php echo $res['productImage']; ?>" alt="prodImage"  Style = "width:80%">
+                                 <?php if($res1['productImage'] != ""): ?>
+                            <img class="card-img-top" src="/SwEngg/upload/<?php echo $res1['productImage']; ?>" alt="prodImage"  Style = "width:80%">
                             <?php else: ?>
                             <img class="card-img-top" src="/SwEngg/upload/default.jpg" alt="prodImage" class="center" Style = "width:100%">
                             <?php endif; ?>
                           <div class="card-body">
 							<!--Displaying product details in a card format -->
 							<label><strong>Product Name:</strong></label>
-							<output type ="text" name="ProductName"><?php echo $res['ProductName'];?></output>
+							<output type ="text" name="ProductName"><?php echo $res1['ProductName'];?></output>
 							<br>
 							<label><strong>ID:</strong></label>
-							<output  type ="text" name="ProductID"><?php echo $res['ID'];?></output>
-							<br>
-							<label><strong>Product Brand:</strong></label>
-							<output type ="text" name="compName"><?php echo $res['CompanyName'];?></output>
+							<output  type ="text" name="ProductID"><?php echo $res1['ID'];?></output>
                             <br>
-							<label><strong>Price:</strong></label>
-							<output type ="text" name="price"><?php echo $res['Price'];?></output>
+							<label><strong>Price: $</strong></label>
+							<output type ="text" name="price"><?php echo $res['TotalPrice'];?></output>
 							<br>
 							<label><strong>Cure For:</strong></label>
-							<output type ="text" name="cureFor"><?php echo $res['CureFor'];?></output>
+							<output type ="text" name="cureFor"><?php echo $res1['CureFor'];?></output>
 							<br>
 							<label><strong>Over the Counter or Not:</strong></label>
 							<output type ="text" name="OtcFlag"><?php echo $res['OtcFlag'];?></output>
 							<br>
-							<label><strong>Featured Image (Y/N):</strong></label>
-							<output type ="text" name="FeaturedFlag"><?php echo $res['Featured_Flag'];?></output>
-							<br>
-							<label><strong>Quantity IN Stock:</strong></label>
-							<output type ="text" name="prodQty"><?php echo $res['NumberInStock'];?></output>
-							<?php $cartQty = $res['NumberInStock']; ?>
+							<label><strong>Quantity:</strong></label>
+							<output type ="text" name="prodQty"><?php echo $res['ProductQuantity'];?></output>
 							<br>
 							<label><strong>Expiry Date:</strong></label>
-							<output type ="date" name="ExpiryDate"><?php echo $res['ExpiryDate'];?></output>	
+							<output type ="date" name="ExpiryDate"><?php echo $res1['ExpiryDate'];?></output>	
+							<?php 
+								
+								if($res['OtcFlag'] == 'N'){?>
+								<strong class="card-title">Doctor NPI number: </strong><?php echo $res['docNPInum'];?><br>
+								<strong class="card-title">Doctor Email ID: </strong><?php echo $res['docEmailId'];?><br>
+								<strong class="card-title">Doctor Prescription: </strong><br>
+								<center><img class="card-img-top" src="/SwEngg/Prescriptions/<?php echo $res['docPrescription']; ?>" alt="Prescription"  Style = "width:50%"></center>
 						<?php } ?></ul>
+
+						<br>
+							<?php	
+								} ?>
                         </div>
 					</div>
 				</div>
@@ -189,13 +197,7 @@
 			<br><br>
         </div>	
         </div>  
-		<?php
-		//Display Error message received from CartDetails.php when we try adding item to cart
-		if (isset($_SESSION['msg'])) {
-			echo '<center><strong><span style ="color:#FF0000;">"' . $_SESSION['msg'] . '"</span></strong></center>';
-			unset($_SESSION['msg']);
-		}
-		?>
+		
 		</form>
 </body>
 </html>

@@ -1,6 +1,6 @@
-// This code allows the admin to search for a product using some of the words in the product name or they can also search the product using specific disease name associated with the medicines (like search for fever gives us the result of Ibuprofen).
+<!--This code allows the admin to search for a product using some of the words in the product name or they can also search the product using specific disease name associated with the medicines (like search for fever gives us the result of Ibuprofen).
 
-//php session start
+//php session start-->
 <?php
     session_start();
     
@@ -10,7 +10,7 @@
     }
 ?>
 
-//html page code that will be viewed when we search for a product.
+<!--html page code that will be viewed when we search for a product.-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,7 +93,7 @@
 					<div class ="col-md-12"></div>
                     <div class="tab-pane  active" id="">
                         <ul class="thumbnails">
-                         //POST Method for 'search'
+                         <!--POST Method for 'search'-->
                             <?php
                             if (isset($_POST['search'])){
                                                             
@@ -104,14 +104,14 @@
                             while($res=mysqli_fetch_array($result)){
                                 $productID=$res['ID'];
                             ?> 
-                             //displaying the products which are retrieved
+                             <!--displaying the products which are retrieved-->
 
                             <div class="row-sm-4">
                                 <div class="thumbnail">
                                     <img src="/SwEngg/upload/<?php echo $res['productImage']; ?>" width="300px" height="200px">
                                 <div class="caption">
                                   <h5><b><?php echo $res['ProductName'];?></b></h5>
-                                  <h6><a class="btn btn-success btn-round" title="Click for more details!" href="userProductDetails.php?ID=<?php echo $res['ID'];?>"><i class="now-ui-icons gestures_tap-01"></i>View</a><span style = "float: right;"><?php echo $res['Price']; ?></h6>
+                                  <h6><a class="btn btn-success btn-round" title="Click for more details!" href="View_Product_Details.php?ID=<?php echo $res['ID'];?>"><i class="now-ui-icons gestures_tap-01"></i>View</a><span style = "float: right;"><?php echo $res['Price']; ?></h6>
                                 </div>
 
                                 </div>

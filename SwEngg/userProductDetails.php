@@ -1,8 +1,8 @@
-// The orderdetails contains  productid, price, name, quantity, total price, the userid , orderdate . After the product is successfully added it is redirected to the userproductdetails which contains the details of the product such as the name of the product, productID given by the admin, the brand name of the product, the price of the product, the description for which it is used, the image of the product, the expiry date, if it is in over counter or not and the quantity in stock.
+<!-- The orderdetails contains  productid, price, name, quantity, total price, the userid , orderdate . After the product is successfully added it is redirected to the userproductdetails which contains the details of the product such as the name of the product, productID given by the admin, the brand name of the product, the price of the product, the description for which it is used, the image of the product, the expiry date, if it is in over counter or not and the quantity in stock.-->
 <?php 
     session_start();
 	//Checking if the user is logged in
-    if (!isset($_SESSION['id'])) {s
+    if (!isset($_SESSION['id'])) {
         header('location:loginnew.php');
         exit();
     }

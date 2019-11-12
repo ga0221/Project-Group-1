@@ -84,41 +84,59 @@
                <?php
     include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
     $ID=$_GET['ID'];
+	$userId=$_GET['UID'];
+	$orderId=$_GET['OID'];
 	//Fetching product details to be viewed
-    $query = "SELECT * FROM products WHERE ID='$ID'";
+    $query = "SELECT * FROM `order details` WHERE ProductID='$ID' and UserID='$userId' AND OrderID='$orderId'";
     $result = mysqli_query($dbConnection,$query);
+	$query1 = "SELECT * FROM `products` WHERE ID='$ID'";
+    $result1 = mysqli_query($dbConnection,$query1);
     while($res = mysqli_fetch_array($result)) {  
-    
+	    $res1 = mysqli_fetch_assoc($result1);
 ?>   
   <div class="row"> 
   <div class="col-sm-4"></div>
  <div class="col-sm-4">			
   <div class="card-columns">
                 <div class="card" style = "width: 30rem; margin:0 auto; " >
-                                 <?php if($res['productImage'] != ""): ?>
-                            <img class="card-img-top" src="/SwEngg/upload/<?php echo $res['productImage']; ?>" alt="prodImage"  Style = "width:100%">
+                                 <?php if($res1['productImage'] != ""): ?>
+                            <img class="card-img-top" src="/SwEngg/upload/<?php echo $res1['productImage']; ?>" alt="prodImage"  Style = "width:100%">
                             <?php else: ?>
                             <img class="card-img-top" src="/SwEngg/upload/default.jpg" alt="prodImage" class="center" Style = "width:100%">
                             <?php endif; ?>
                           <div class="card-body">
 							<!--Display all the details-->
                               <ul><strong class="card-title">Product Name: </strong><?php echo $res['ProductName'];?></ul>
-                             <ul><strong class="card-text">ID:</strong><?php echo $res['ID']; ?></ul>
-		                       <ul> <strong class="card-text">Product Brand:</strong> <?php echo $res['CompanyName']; ?> </ul>
-					          <ul><strong class="card-title">Price:</strong> <?php echo $res['Price']; ?></ul>
-                              <ul><strong class="card-title">Cure For:</strong> <?php echo $res['CureFor']; ?></ul>
+                             <ul><strong class="card-text">ID:</strong><?php echo $res['ProductID']; ?></ul>
+					          <ul><strong class="card-title">Price: $</strong> <?php echo $res['TotalPrice']; ?></ul>
+                              <ul><strong class="card-title">Cure For:</strong> <?php echo $res1['CureFor']; ?></ul>
 							  <ul><strong class="card-title">Over The Counter or Not:</strong><?php echo $res['OtcFlag']; ?> </ul>
-							  <ul><strong class="card-title">Featured Image (Y/N):</strong><?php echo $res['Featured_Flag']; ?></ul>
-							  <ul><strong class="card-title">Quantity In stock:</strong> <?php echo $res['NumberInStock']; ?></ul>
-							  <ul><strong class="card-title">Expiry Date:</strong> <?php echo $res['ExpiryDate']; ?></ul>
+							  <ul><strong class="card-title">Quantity:</strong><?php echo $res['ProductQuantity']; ?></ul>
+							  <ul><strong class="card-title">Order Date:</strong><?php echo $res['OrderDate']; ?></ul>
+							  <ul><strong class="card-title">Expiry Date:</strong> <?php echo $res1['ExpiryDate']; ?></ul>
+							<?php 
+								
+								if($res['OtcFlag'] == 'N'){?>
+									<ul><strong class="card-title">Doctor NPI number: </strong><?php echo $res['docNPInum'];?></ul>
+									<ul><strong class="card-title">Doctor Email ID: </strong><?php echo $res['docEmailId'];?></ul>
+									<ul><strong class="card-title">Doctor Prescription: </strong> </ul>
+							
+								
                             </div>
+							<center><img class="card-img-top" src="/SwEngg/Prescriptions/<?php echo $res['docPrescription']; ?>" alt="Prescription"  Style = "width:50%"></center>
+							<br>
+							<?php	
+								} ?>
 							</div>
 							</div>
+							
+							
 							</div>
 						
                  </div>
 				 <?php
 	}  ?>
+	<br><br>
 				</div> 
 	
 	

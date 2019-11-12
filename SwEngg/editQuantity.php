@@ -113,7 +113,7 @@
                 <?php 
                     $user_id = $_SESSION['id'];
                     $OrderID=$_GET['OrderID'];
-					$query=mysqli_query($dbConnection,"SELECT * FROM `order details` WHERE UserID='$user_id' AND OrderStatus='cart'");
+					$query=mysqli_query($dbConnection,"SELECT * FROM `order details` WHERE UserID='$user_id' AND OrderStatus='cart' AND OrderID='$OrderID'");
 					$row=mysqli_fetch_array($query);	
 					//$count=mysqli_num_rows($query);
 					$ProductID=$row['ProductID'];

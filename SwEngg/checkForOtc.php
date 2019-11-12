@@ -1,4 +1,4 @@
-// To check whether the medicines were over the counter or not? In the userproduct details we have the field if the medicine is over the counter or not. It means that these medicines require more information such as the Doctor name, prescription, NPI number and the emailid of the doctor. The delivery address requires complete information.  
+<!-- To check whether the medicines were over the counter or not? In the userproduct details we have the field if the medicine is over the counter or not. It means that these medicines require more information such as the Doctor name, prescription, NPI number and the emailid of the doctor. The delivery address requires complete information.  -->
 <?php
     session_start();
     
@@ -149,7 +149,7 @@
 						$count=mysqli_num_rows($query);
 						if($count >= 1){		?>
 						
-						    <form method="POST" action="checkDocDetails.php">
+						    <form method="POST" action="checkDocDetails.php" enctype="multipart/form-data">
 							<br>
 							<strong><h4 style ="color:#FF0000;">Please enter additional details as you have medicines which cannot be sold over the counter!!</h4></strong>
 							<label>Doctor's Name:</label>
@@ -160,10 +160,10 @@
 							<input type="text" class="form-control" name="dEmailId" required>
 							<label>Upload Prescription</label>
 							<div class="input-group">
-								<input type="file" class="form-control" id="prescription" name="prescription"Placeholder="Please upload a valid .jpg or .png file" required>  
+								<input type="file" class="form-control" id="prescription" name="prescription" Placeholder="Please upload a valid .jpg or .png file" required>  
 							</div>
 							<br>
-							<button  type="submit" id="" name="submit" class="btn btn-success btn-round pull-right"><i class="now-ui-icons shopping_bag-16"></i> Continue</button> 
+							<button  type="submit" id="submit" name="submit" class="btn btn-success btn-round pull-right"><i class="now-ui-icons shopping_bag-16"></i> Continue</button> 
 							</form>
 							
 							
@@ -171,7 +171,7 @@
 					<?php }
 					
 						if (isset($_SESSION['msg1'])) {
-							echo "<br><br><br>";
+							echo "<br><br>";
 							echo '<center><strong><span style ="color:#FF0000;">"' . $_SESSION['msg1'] . '"</span></strong></center>';
 							unset($_SESSION['msg1']);
 						}

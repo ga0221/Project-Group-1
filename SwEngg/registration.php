@@ -22,7 +22,7 @@ include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
       <nav class="navbar navbar-expand-lg navbar-light ">
          <a class="navbar-brand" id="logo" href="loginnew.php">Med-Anytime</a>
       </nav>
-      <form method= "post"  action="" id="formstyle">
+      <form method= "post"  action="" id="formstyle" enctype="multipart/form-data">
          <h4> Buy Medicines Online !!</h4>
          <h5> Fill out these details to register </h5>
          <div class="form-row">
@@ -115,12 +115,12 @@ include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
 				$pass1 = md5($password);
 				$salt  = "a1Bz20ydqelm8m1wql";
 				$pass1 = $salt . $pass1;
-				$filename = $_POST["govtID"];
+				//$filename = $_POST["govtID"];
 				//upload stateID
 				
 				//Uploading stateID for the user in a server folder
-				//move_uploaded_file($_FILES["govtID"]["tmp_name"], "C:/xampp/htdocs/SwEngg/upload stateID/" . $_FILES["govtID"]["name"]);
-				//$filename = $_FILES["govtID"]["name"];
+				move_uploaded_file($_FILES["govtID"]["tmp_name"], "C:/xampp/htdocs/SwEngg/stateID/" . $_FILES["govtID"]["name"]);
+				$filename = $_FILES["govtID"]["name"];
 				
 				// checking empty fields
 				if (empty($firstname) || empty($lastname) || empty($username) || empty($gender) || empty($password) || empty($filename) || empty($terms) || empty($DOB)) {

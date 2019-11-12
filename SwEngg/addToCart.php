@@ -1,6 +1,6 @@
-// This page facilitates to add the product by the user to the user page
+<!--This page facilitates to add the product by the user to the user page
 
-//php session start
+//php session start-->
 <?php
     session_start();
 	//Checking if the user is logged in
@@ -30,31 +30,31 @@
 			  $OtcFlag = $res['OtcFlag'];
 			  
               if (isset($_POST['submit'])){
-				  $query1 = "SELECT * FROM `order details` WHERE ProductID='$ProductID' and UserID='$userId'";
+				  $query1 = "SELECT * FROM `order details` WHERE ProductID='$ProductID' and UserID='$userId' and OrderStatus='Cart'";
 				  $result1 = mysqli_query($dbConnection,$query1);
 				  while($res1 = mysqli_fetch_array($result1)){
 					  $_SESSION['msg'] = "Product already in cart.Please change the quantity in the cart.";
 					  //For testing only
-					  echo $_SESSION['msg'];
-					  return 1;
-					  //header("Location: userProductDetails.php?ID=$ProductID");
-					  //exit();
+					  //echo $_SESSION['msg'];
+					  //return 1;
+					  header("Location: userProductDetails.php?ID=$ProductID");
+					  exit();
 				  }
 
 
                   if($cartQty == 0){    
 					  $_SESSION['msg'] = "Please select quantity!!!";
 					  //For testing only (TESTING)
-					  echo $_SESSION['msg'];
-					  return 2;
-					  //header("Location: userProductDetails.php?ID=$ProductID");
+					  //echo $_SESSION['msg'];
+					  //return 2;
+					  header("Location: userProductDetails.php?ID=$ProductID");
                   }
 				  else if($prodQty == 0){
 					  $_SESSION['msg'] = "Product is out of stock. Please return later!!!";
 					  //For testing only (TESTING)
-					  echo $_SESSION['msg'];
-					  return 3;
-					  //header("Location: userProductDetails.php?ID=$ProductID");
+					  //echo $_SESSION['msg'];
+					  //return 3;
+					  header("Location: userProductDetails.php?ID=$ProductID");
 				  }
 				  else {
 
@@ -66,9 +66,9 @@
 				  
 				  $_SESSION['msg'] = "Product added to cart.";
 				  //For testing only
-					  echo $_SESSION['msg'];
-					  return 1;
-				  //header("Location: userProductDetails.php?ID=$ProductID");
+					  //echo $_SESSION['msg'];
+					  //return 1;
+				  header("Location: userProductDetails.php?ID=$ProductID");
                   }
                   }
 				  else

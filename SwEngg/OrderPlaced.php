@@ -110,8 +110,10 @@
            echo '<center><strong><span style ="color:#FF0000;">Total: $'.$total.' | </span></strong></center>';
            echo '<center><strong><span style ="color:#FF0000;">Shipping Address: '.$ship_add.' *********</span></strong></center>';
 		   //For Test Cases
-		   return 1;
-           mysqli_query ($dbConnection,"UPDATE `order details` SET OrderStatus = 'Placed', `TrackingNumber` = '$track_num' WHERE UserID ='$user_id' AND OrderStatus='Cart' ");           
+		   //return 1;
+           mysqli_query ($dbConnection,"UPDATE `order details` SET OrderStatus = 'Placed',`OrderDate` = '$date',`TrackingNumber` = '$track_num' WHERE UserID ='$user_id' AND OrderStatus='Cart' ");  
+		   mail("sravani95@gmail.com","Success","Send mail from localhost using PHP");
+		   header("Location: PHPMailer.php");
 		}
 			
 		}

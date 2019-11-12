@@ -84,7 +84,7 @@
 
       <?php 
         $user_id = $_SESSION['id'];
-        $query=mysqli_query($dbConnection,"SELECT * FROM `order details` WHERE UserID='$user_id' AND OrderStatus='placed'");
+        $query=mysqli_query($dbConnection,"SELECT * FROM `order details` WHERE UserID='$user_id'");
         $count=mysqli_num_rows($query);
 		$res = mysqli_fetch_array($query);
       ?>
@@ -135,7 +135,7 @@
 				  <td><br><?php echo $row['OrderStatus'];?></td>
 				  <td><br><?php echo $row['TrackingNumber'];?></td>
                   <td>
-                  <a href="view_order_products_users.php?ID=<?php echo $row['ProductID'];?>"<button class="btn btn-success btn-round"> View item </button></a>			  
+                  <a href="view_order_products_users.php?ID=<?php echo $row['ProductID'];?>&Status=<?php echo $row['OrderStatus'];?>"<button class="btn btn-success btn-round"> View item </button></a>			  
 				  <td>
 				  <a href="cancel_order_details.php?orderID=<?php echo $row['OrderID'];?>" ><button class="btn btn-danger btn-round" onclick="return confirm('Are you sure you want to cancel?')" type="button">Cancel item</button></a>
 				  </td>
