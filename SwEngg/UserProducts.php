@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/763504b100.js" crossorigin="anonymous"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="app new2.css">
 
@@ -26,7 +26,7 @@
   <body>
   <!--Navbar-->
   <nav  class="navbar navbar-dark navbar-expand-md pt-0 pb-0 fixed-top">
-      <a href="userpage2.php" class="navbar-brand">Med-AnyTime</a>
+   <a href="userpage2.php" class="navbar-brand"> Med-AnyTime   </a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navmenu" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,26 +41,27 @@
       </li>
 	 
 	   <li class="nav-item">
-	   <!--Redirects to the same page-->
         <a class="nav-link" href="UserProducts.php">Products</a>
       </li>
 	    <li class="nav-item">
-        <a class="nav-link" href="CartDetails.php">Cart</a>
+        <a class="nav-link" href="CartDetails.php">Cart <i class="fas fa-shopping-cart fa-md"></i></a>
       </li>
 	  <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="now-ui-icons users_circle-08"></i>
+                    
                             <?php
-							     //Fetching user details
+								 //Checking for user details to diplay on the nav bar
                                  include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php');
                                  $query=mysqli_query($dbConnection,"SELECT * FROM `userdetails` WHERE UserId='".$_SESSION['id']."'");
                                  $row=mysqli_fetch_assoc($query);
                                  echo ''.$row['FirstName'].'';
                             ?>
+							       <i class="fas fa-user"></i>
                         </a>
 						<div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">View Orders</a>
-          <a class="dropdown-item" href="#">View Profile Information</a>
+          <a class="dropdown-item" href="Order_details_User.php">View Orders</a>
+          <?php echo "<a class=\"dropdown-item\" href=\"ViewProfile.php?ID=".$row['ID']."\">View Profile</a>"; ?>
+		  
          <a class="dropdown-item" href="logout.php">Logout</a>
         </div>
       

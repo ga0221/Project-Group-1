@@ -45,7 +45,7 @@
       </li>  
        <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="now-ui-icons users_circle-08"></i>
+                           
                             <?php
                                 include('C:/xampp/htdocs/SwEngg/Config/dbConnection.php'); 
 								$query=mysqli_query($dbConnection,"SELECT * FROM `admindetails` WHERE AdminId='".$_SESSION['id']."'");
@@ -54,7 +54,7 @@
                             ?>
                         </a>
 						<div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">View Orders</a>
+          
           <a class="dropdown-item" href="AdminViewProfile.php">View Profile Information</a>
            <a class="dropdown-item" href="logout.php">Logout</a>
       

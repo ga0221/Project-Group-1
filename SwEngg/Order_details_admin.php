@@ -107,42 +107,36 @@
       <table class="table table-condensed table-bordered">
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Description</th>
-                  <th width="100">Quantity</th>
-				  <th width="100">Price</th>
-                  <th width="100">Total Price</th>
-				  <th width="100">User ID</th>
-				  <th width= "100">View Order </th>
-				  <th width="100"> Cancel Order </th>
+                  
+				  <th width="100">Tracking Number</th>
+				  <th width= "100">User ID</th>
+				  <th width= "100">Order Date</th>
+				  <th width="100"> Total Price</th>
+				  <th width="100">View Order</th>
+				  <th width="100">Cancel Order</th>
                 </tr>
               </thead>
 
               <tbody>
 
           <?php 
-            $query1=mysqli_query($dbConnection,"SELECT * FROM `order details` WHERE OrderStatus='placed'");
+            $query1=mysqli_query($dbConnection,"SELECT TrackingNumber, UserID, `OrderDate`, Sum(TotalPrice) FROM `order details` WHERE OrderStatus='Placed' GROUP BY `TrackingNumber`");
             while($row=mysqli_fetch_array($query1)){
             $count1=mysqli_num_rows($query1);
-            $ProductID=$row['ProductID'];
-            $query2=mysqli_query($dbConnection,"SELECT * FROM products WHERE ID='$ProductID'");
-            $row2=mysqli_fetch_array($query2);
+            //$ProductID=$row['ProductID'];
+            //$query2=mysqli_query($dbConnection,"SELECT * FROM products WHERE ID='$ProductID'");
+            //$row2=mysqli_fetch_array($query2);
           ?>
 
               <tr>
-                  <td> <img width="150" height="100" src="/SwEngg/upload/<?php echo $row2['productImage']; ?>" alt=""/></td>
-                  <td><b><?php echo $row2['ProductName'];?></b><br><br>
-                    <?php echo $row2['CompanyName'];
-                    ?>
-                  </td>
-                  <td><br><?php  echo $row['ProductQuantity']; ?></td>
-                  <td><br><?php  echo $row2['Price']; ?></td>
-                  <td><br><?php echo $row['TotalPrice'];?></td>
+                  <td><br><?php echo $row['TrackingNumber'];?></td>
 				  <td><br><?php echo $row['UserID'];?></td>
+				  <td><br><?php echo $row['OrderDate'];?></td>
+				  <td><br><?php echo number_format($row['Sum(TotalPrice)'], 2, '.', ' ');?></td>
                   <td>
-                  <a href="view_Order_products_admins.php?ID=<?php echo $row['ProductID'];?>&UID=<?php echo $row['UserID'];?>&OID=<?php echo $row['OrderID'];?>"><button class="btn btn-success btn-round" type="button"> View this item </button></a>				  
+                  <a href="view_Order_products_admins.php?TNum=<?php echo $row['TrackingNumber'];?>&UID=<?php echo $row['UserID'];?>"><button class="btn btn-success btn-round" type="button"> View this Order </button></a>				  
 				  <td>
-				  <a href="cancel_order_details_admin.php?orderID=<?php echo $row['OrderID'];?>" ><button class="btn btn-danger btn-round" onclick="return confirm('Are you sure you want to cancel?')" type="button">Cancel this item</button></a>
+				  <a href="cancel_order_details_admin.php?TNum=<?php echo $row['TrackingNumber'];?>&UID=<?php echo $row['UserID'];?>" ><button class="btn btn-danger btn-round" onclick="return confirm('Are you sure you want to cancel?')" type="button">Cancel this Order</button></a>
 				  </td>
 				  
                   <?php
@@ -167,5 +161,10 @@
 <br><br><br><br>
     </div>
 	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	
 </body>
 </html>

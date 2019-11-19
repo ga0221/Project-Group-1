@@ -58,7 +58,7 @@
                             ?>
                         </a>
 						<div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">View Orders</a>
+         
           <a class="dropdown-item" href="AdminViewProfile.php">View Profile Information</a>
            <a class="dropdown-item" href="logout.php">Logout</a>
       
