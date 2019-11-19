@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2019 at 07:50 AM
+-- Generation Time: Nov 19, 2019 at 08:16 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -84,7 +84,7 @@ CREATE TABLE `order details` (
   `ProductQuantity` int(11) NOT NULL,
   `ProductName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `OtcFlag` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TotalPrice` decimal(10,0) NOT NULL,
+  `TotalPrice` float NOT NULL,
   `OrderDate` date NOT NULL,
   `OrderStatus` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `TrackingNumber` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -103,27 +103,74 @@ CREATE TABLE `order details` (
 --
 
 INSERT INTO `order details` (`OrderID`, `UserID`, `ProductID`, `ProductQuantity`, `ProductName`, `OtcFlag`, `TotalPrice`, `OrderDate`, `OrderStatus`, `TrackingNumber`, `Street Address`, `County`, `City`, `State`, `ZipCode`, `docEmailId`, `docNPInum`, `docPrescription`) VALUES
-(16, 'mpalkar@gmail.com', 13, 2, 'Imodium', 'Y', '20', '2019-11-04', 'Deleted', '5dc0e22e2cf90', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
-(18, 'alicia@gmail.com', 16, 1, 'cetaphil', 'Y', '11', '2019-11-04', 'Cancelled', '', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
-(19, 'alicia@gmail.com', 13, 8, 'Imodium', 'Y', '80', '2019-11-04', 'Deleted', '5dc0891c2dcd4', '2345, Mulberry Street', 'Denton', 'Dallas', 'Texas', 0, '', 0, ''),
-(20, 'alicia@gmail.com', 12, 1, 'equate earache drops', 'Y', '7', '2019-11-04', 'Placed', '5dc0896590327', '567, Stella Streey', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
-(21, 'mpalkar@gmail.com', 15, 3, 'Aspirin', 'N', '30', '2019-11-05', 'Cancelled', '5dc0e22e2cf90', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'marksloan@gmail.com', 9871235673, ''),
-(22, 'mpalkar@gmail.com', 16, 1, 'cetaphil', 'N', '11', '2019-11-05', 'Deleted', '5dc0ea695d0ac', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, ''),
-(25, 'mpalkar@gmail.com', 28, 3, 'Dark Chocolate', 'Y', '18', '2019-11-05', 'Placed', '5dc11b35125b1', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
-(26, 'mpalkar@gmail.com', 33, 2, 'ZZZQuil', 'N', '44', '2019-11-05', 'Placed', '5dc11b35125b1', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, '1.png'),
-(27, 'mGrey@gmail.com', 33, 2, 'ZZZQuil', 'N', '44', '2019-11-05', 'Placed', '5dc11c182f965', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, ''),
-(29, 'mGrey@gmail.com', 33, 1, 'ZZZQuil', 'N', '22', '2019-11-05', 'Placed', '5dc7ad3e686ec', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, ''),
-(30, 'mpalkar@gmail.com', 4, 2, 'Ibuprofen', 'Y', '18', '2019-11-05', 'Deleted', '5dc1abc9992cc', '1407, Bernard Street', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
-(31, 'mpalkar@gmail.com', 32, 1, 'Excedrin', 'N', '18', '2019-11-10', 'Placed', '5dc7c3b9400b4', '1235,Mulberry Street', 'Denton', 'Dallas', 'Texas', 76201, 'marksloan@gmail.com', 9871235673, 'Assign-5.docx'),
-(32, 'mpalkar@gmail.com', 32, 1, 'Excedrin', 'N', '18', '2019-11-10', 'Placed', '5dc7c4233be3e', '2345, Mulberry Street', 'Arlington', 'Dallas', 'Texas', 76201, 'marksloan@gmail.com', 9871235673, 'cslab5a.docx'),
-(33, 'mpalkar@gmail.com', 33, 1, 'ZZZQuil', 'N', '22', '2019-11-10', 'Placed', '5dc7c699801a8', '2345, Mulberry Street', 'Dallas', 'Dallas', 'Texas', 76201, 'marksloan@gmail.com', 9871235673, '5.png'),
-(34, 'mpalkar@gmail.com', 13, 1, 'Imodium', 'Y', '10', '2019-11-10', 'Placed', '5dc7c71e706f9', '2345, Mulberry Street', 'Dallas', 'Dallas', 'Texas', 76459, '', 0, ''),
-(35, 'alicia@gmail.com', 13, 1, 'Imodium', 'Y', '10', '2019-11-10', 'Placed', '5dc7ca7c047a2', '1407,Bernard Street', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
-(36, 'alicia@gmail.com', 4, 1, 'Ibuprofen', 'Y', '9', '2019-11-10', 'Placed', '5dc7cb7a6e2ff', '1235,Mulberry Street', 'Dallas', 'Dallas', 'Texas', 76548, '', 0, ''),
-(37, 'alicia@gmail.com', 15, 1, 'Aspirin', 'Y', '10', '2019-11-10', 'Placed', '5dc7cc609e715', '1407, Bernard Streey', 'Dallas', 'Dallas', 'Texas', 76548, '', 0, ''),
-(38, 'alicia@gmail.com', 15, 1, 'Aspirin', 'Y', '10', '2019-11-10', 'Placed', '5dc7cc862f521', '1405,Bernard Street', 'Dallas', 'Dallas', 'Texas', 76459, '', 0, ''),
-(39, 'alicia@gmail.com', 13, 1, 'Imodium', 'Y', '10', '2019-11-10', 'Placed', '5dc7d06e17da9', '1407,Bernard Street', 'Dallas', 'Dallas', 'Texas', 76548, '', 0, ''),
-(40, 'mGrey@gmail.com', 15, 1, 'Aspirin', 'Y', '10', '2019-11-10', 'Placed', '5dc86dba6bd8f', '1235,Mulberry Street', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, '');
+(16, 'mpalkar@gmail.com', 13, 2, 'Imodium', 'Y', 20, '2019-11-04', 'Deleted', '5dc0e22e2cf90', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
+(18, 'alicia@gmail.com', 16, 1, 'cetaphil', 'Y', 11, '2019-11-04', 'Cancelled', '', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
+(19, 'alicia@gmail.com', 13, 8, 'Imodium', 'Y', 80, '2019-11-04', 'Cart', '5dc0891c2dcd4', '2345, Mulberry Street', 'Denton', 'Dallas', 'Texas', 0, '', 0, ''),
+(21, 'mpalkar@gmail.com', 15, 3, 'Aspirin', 'N', 30, '2019-11-05', 'Cancelled', '5dc0e22e2cf90', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'marksloan@gmail.com', 9871235673, ''),
+(22, 'mpalkar@gmail.com', 16, 1, 'cetaphil', 'N', 11, '2019-11-05', 'Deleted', '5dc0ea695d0ac', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, ''),
+(25, 'mpalkar@gmail.com', 28, 3, 'Dark Chocolate', 'Y', 0, '2019-11-05', 'Deleted', '5dc11b35125b1', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
+(26, 'mpalkar@gmail.com', 33, 2, 'ZZZQuil', 'N', 0, '2019-11-05', 'Deleted', '5dc11b35125b1', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, '1.png'),
+(29, 'mGrey@gmail.com', 33, 1, 'ZZZQuil', 'N', 22, '2019-11-05', 'Placed', '5dc7ad3e686ec', '1407, Bernard Street', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, ''),
+(30, 'mpalkar@gmail.com', 4, 2, 'Ibuprofen', 'Y', 18, '2019-11-05', 'Deleted', '5dc1abc9992cc', '1407, Bernard Street', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
+(33, 'mpalkar@gmail.com', 33, 1, 'ZZZQuil', 'N', 22, '2019-11-10', 'Placed', '5dc7c699801a8', '2345, Mulberry Street', 'Dallas', 'Dallas', 'Texas', 76201, 'marksloan@gmail.com', 9871235673, '5.png'),
+(35, 'alicia@gmail.com', 13, 1, 'Imodium', 'Y', 10, '2019-11-10', 'Placed', '5dc7ca7c047a2', '1407,Bernard Street', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
+(37, 'alicia@gmail.com', 15, 1, 'Aspirin', 'Y', 10, '2019-11-10', 'Placed', '5dc7cc609e715', '1407, Bernard Streey', 'Dallas', 'Dallas', 'Texas', 76548, '', 0, ''),
+(47, 'mpalkar@gmail.com', 13, 1, 'Imodium', 'Y', 9.99, '2019-11-17', 'Placed', '5dd0c7ce74ee7', '223, Avenue G, Unit-7', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
+(49, 'mpalkar@gmail.com', 28, 1, 'Dark Chocolate', 'Y', 6, '2019-11-17', 'Placed', '5dd0d11588e33', '223, Avenue G, Unit-7', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
+(50, 'mpalkar@gmail.com', 12, 1, 'equate earache drops', 'Y', 6.5, '2019-11-17', 'Placed', '5dd0d976d4eb5', '2604, Legacy West', 'Arlington', 'Dallas', 'Texas', 73456, '', 0, ''),
+(51, 'mpalkar@gmail.com', 15, 1, 'Aspirin', 'Y', 10, '2019-11-17', 'Placed', '5dd0dae420e1a', '1235,Mulberry Street', 'Garland', 'Dallas', 'Texas', 76201, '', 0, ''),
+(52, 'mpalkar@gmail.com', 33, 1, 'ZZZQuil', 'N', 22, '2019-11-17', 'Placed', '5dd0dd7d66bf9', '223, Avenue G, Unit-7', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, 'arch1-poster_06-03.png'),
+(53, 'mpalkar@gmail.com', 28, 1, 'Dark Chocolate', 'Y', 6, '2019-11-17', 'Placed', '5dd0dfad19d3b', '1235,Mulberry Street', 'Fort Worth', 'Dallas', 'Texas', 73456, '', 0, ''),
+(54, 'mGrey@gmail.com', 33, 1, 'ZZZQuil', 'N', 22, '2019-11-19', 'Cancelled', '5dd327e3cebd3', '1235,Mulberry Street', 'Denton', 'Dallas', 'Texas', 76201, 'marksloan@gmail.com', 9871235673, 'receipt1.jpg'),
+(55, 'mpalkar@gmail.com', 4, 1, 'Ibuprofen', 'Y', 8.99, '2019-11-18', 'Placed', '5dd316db0f13a', '2604, Legacy West', 'Frisco', 'Dallas', 'Texas', 73456, '', 0, ''),
+(56, 'mpalkar@gmail.com', 12, 1, 'equate earache drops', 'Y', 6.5, '2019-11-18', 'Placed', '5dd316db0f13a', '2604, Legacy West', 'Frisco', 'Dallas', 'Texas', 73456, '', 0, ''),
+(57, 'mGrey@gmail.com', 33, 1, 'ZZZQuil', 'N', 22, '2019-11-19', 'Placed', '5dd32df89cca5', '1235,Mulberry Street', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, 'receipt1.jpg'),
+(59, 'mpalkar@gmail.com', 32, 1, 'Excedrin', 'N', 18, '2019-11-19', 'Placed', '5dd344727224f', '2604, Legacy West', 'Frisco', 'Dallas', 'Texas', 73456, 'derekshepherd@gmail.com', 7654567896, 'WIN_20191030_13_30_15_Pro.jpg'),
+(61, 'mGrey@gmail.com', 10, 1, 'Pepto-Bismol 5', 'Y', 6.49, '2019-11-19', 'Placed', '5dd350f733389', '2604, Legacy West', 'Frisco', 'Dallas', 'Texas', 73456, '', 0, ''),
+(62, 'mGrey@gmail.com', 28, 1, 'Dark Chocolate', 'Y', 6, '2019-11-19', 'Placed', '5dd35452abee8', '223, Avenue G, Unit-7', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
+(63, 'aarthisingh19399@gmail.com', 14, 2, 'algaecal plus', 'Y', 138, '2019-11-19', 'Placed', '5dd360b9c8a95', '223, Avenue G, Unit-7', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
+(64, 'aarthisingh19399@gmail.com', 32, 1, 'Excedrin', 'N', 18, '2019-11-19', 'Placed', '5dd360b9c8a95', '223, Avenue G, Unit-7', 'Denton', 'Dallas', 'Texas', 76201, 'derekshepherd@gmail.com', 7654567896, 'WIN_20191030_13_30_15_Pro.jpg'),
+(65, 'aarthisingh19399@gmail.com', 4, 1, 'Ibuprofen', 'Y', 8.99, '2019-11-19', 'Placed', '5dd36982b7d68', '223, Avenue G, Unit-7', 'Arlington', 'Dallas', 'Texas', 75689, '', 0, ''),
+(66, 'mpalkar@gmail.com', 28, 1, 'Dark Chocolate', 'Y', 6, '2019-11-19', 'Placed', '5dd363b38e70f', '223, Avenue G, Unit-7', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
+(67, 'mpalkar@gmail.com', 14, 1, 'algaecal plus', 'Y', 69, '2019-11-19', 'Placed', '5dd364f94b85d', '2604, Legacy West', 'Dallas', 'Dallas', 'Texas', 76435, '', 0, ''),
+(68, 'mpalkar@gmail.com', 15, 1, 'Aspirin', 'Y', 10, '2019-11-19', 'Placed', '5dd3658da81c8', '2604, Legacy West', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
+(69, 'mpalkar@gmail.com', 2, 1, 'MediFirst', 'Y', 14.41, '2019-11-19', 'Placed', '5dd365c99a715', '223, Avenue G, Unit-7', 'Denton', 'Dallas', 'Texas', 76201, '', 0, ''),
+(70, 'mpalkar@gmail.com', 2, 1, 'MediFirst', 'Y', 14.41, '2019-11-19', 'Placed', '5dd366da64885', '2604, Legacy West', 'Dallas', 'Dallas', 'Texas', 76201, '', 0, ''),
+(71, 'aarthisingh19399@gmail.com', 15, 1, 'Aspirin', 'Y', 0, '2019-11-19', 'Placed', '5dd372f865268', '223, Avenue G, Unit-7', 'Denton', 'Dallas', 'Texas', 76201, '', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `payment_id` int(11) NOT NULL,
+  `item_number` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `txn_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `payment_gross` float(10,2) NOT NULL,
+  `currency_code` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `payment_status` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`payment_id`, `item_number`, `txn_id`, `payment_gross`, `currency_code`, `payment_status`) VALUES
+(1, '', '5815638816242981J', 6.00, 'USD', 'Completed'),
+(2, '5dd0d11588e33', '96F471891Y623820B', 7.00, 'USD', 'Completed'),
+(3, '5dd0dae420e1a', '6KK98224VK397240S', 10.00, 'USD', 'Completed'),
+(4, '5dd0dd7d66bf9', '1M264338BA0975252', 22.00, 'USD', 'Completed'),
+(5, '5dd327e3cebd3', '3X219101G63814535', 22.00, 'USD', 'Completed'),
+(6, '5dd350f733389', '1TS79722LE8175345', 6.49, 'USD', 'Completed'),
+(7, '5dd35452abee8', '0U2290365H3189005', 6.00, 'USD', 'Completed'),
+(8, '', '0U2290365H3589605', 8.00, 'USD', 'Completed'),
+(9, '', '63Y37292V5912521J', 22.00, 'USD', 'Completed'),
+(10, '5dd365c99a715', '0YR84083BR007783R', 6.00, 'USD', 'Completed'),
+(11, '5dd366da64885', '3JY00647YG398781K', 22.00, 'USD', 'Completed'),
+(12, '5dd36982b7d68', '0H058008K5443694U', 22.00, 'USD', 'Completed'),
+(14, '5dd372f865268', '7TD08192YS0915449', 6.00, 'USD', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -149,25 +196,25 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ID`, `ProductName`, `CompanyName`, `CureFor`, `Price`, `OtcFlag`, `Featured_Flag`, `ExpiryDate`, `NumberInStock`, `productImage`) VALUES
-(2, 'MediFirst', 'Medi-First', 'Cold Relief', '14.41', 'Y', 'Y', '2021-10-19', 0, 'default.jpg'),
-(3, 'Coldcalm', 'Boiron', 'Cold', '8.99', 'Y', 'N', '2020-10-01', 35, 'coldcalm.jpg'),
-(4, 'Ibuprofen', 'Ibuprofen', 'Fever', '8.99', 'Y', 'N', '2021-06-01', 0, 'default.jpg'),
+(2, 'MediFirst', 'Medi-First', 'Cold Relief', '14.41', 'Y', 'Y', '2021-10-19', 18, 'default.jpg'),
+(3, 'Coldcalm', 'Boiron', 'Cold', '12.00', 'Y', 'N', '2020-10-01', 40, 'coldcalm.jpg'),
+(4, 'Ibuprofen', 'Ibuprofen', 'Fever', '8.99', 'Y', 'N', '2021-06-01', 30, 'default.jpg'),
 (7, 'Advil', 'advil', 'Head ache', '13.99', 'Y', 'N', '2020-05-14', 35, 'advil.jpg'),
-(10, 'Pepto-Bismol 5', 'Pepto', 'Indigestion', '6.49', 'Y', 'N', '2020-08-29', 50, 'pepto bismol.jpg'),
-(11, 'First Aid kit', 'Uline', 'first aid', '25.00', 'Y', 'Y', '2021-02-25', 10, 'first aid.jpg'),
-(12, 'equate earache drops', 'equate', 'ear ache', '6.50', 'Y', 'Y', '2020-12-26', 9, 'equate ear ache drops.jpg'),
-(13, 'Imodium', 'Imodium', 'Diarrhea', '9.99', 'Y', 'Y', '2020-12-31', 2, 'imodium.jpg'),
-(14, 'algaecal plus', 'algaecal', 'calcium suppliment', '69.00', 'Y', 'Y', '2021-06-17', 25, 'algaecal.jpg'),
-(15, 'Aspirin', 'Bayer', 'Pain relief', '10.00', 'Y', 'N', '2021-05-12', 21, 'Aspirin.jpg'),
+(10, 'Pepto-Bismol 5', 'Pepto', 'Indigestion', '6.49', 'Y', 'N', '2020-08-29', 48, 'pepto bismol.jpg'),
+(11, 'First Aid kit', 'Uline', 'first aid', '25.00', 'Y', 'Y', '2021-02-25', 45, 'first aid.jpg'),
+(12, 'equate earache drops', 'equate', 'ear ache', '6.50', 'Y', 'Y', '2020-12-26', 21, 'equate ear ache drops.jpg'),
+(13, 'Imodium', 'Imodium', 'Diarrhea', '9.99', 'Y', 'Y', '2020-12-31', 25, 'imodium.jpg'),
+(14, 'algaecal plus', 'algaecal', 'calcium suppliment', '69.00', 'Y', 'Y', '2021-06-17', 22, 'algaecal.jpg'),
+(15, 'Aspirin', 'Bayer', 'Pain relief', '10.00', 'Y', 'N', '2021-05-12', 16, 'Aspirin.jpg'),
 (16, 'cetaphil', 'cetaphil', 'acne', '10.99', 'Y', 'Y', '2019-12-26', 27, 'cetaphil.jpg'),
-(26, 'TestProduct', 'TestComp', 'test', '5.99', 'Y', 'N', '2022-12-22', 60, ''),
 (27, 'Chocolate Gift Basket', 'Hersheys', 'Chocolates', '18.00', 'Y', 'Y', '2022-11-14', 25, 'Chocolate Gift Basket.jpeg'),
-(28, 'Dark Chocolate', 'Dollar General', 'Chocolates', '6.00', 'Y', 'N', '2021-10-30', 9, 'Dark Chocolate.jpeg'),
+(28, 'Dark Chocolate', 'Dollar General', 'Chocolates', '6.00', 'Y', 'N', '2021-10-30', -5, 'Dark Chocolate.jpeg'),
 (29, 'Hersheys', 'Hersheys', 'Chocolates', '2.00', 'Y', 'N', '2024-12-23', 21, 'Hersheys.jpeg'),
 (30, 'Hersheys Set', 'Hersheys', 'Chocolates', '25.00', 'Y', 'Y', '2025-07-23', 30, 'Hersheys Set.jpeg'),
 (31, 'Sour Patch', 'Sour Patch', 'Chocolates', '5.00', 'Y', 'N', '2025-11-19', 40, 'Sour Patch.jpeg'),
-(32, 'Excedrin', 'Excedrin', 'Migraine', '18.00', 'N', 'N', '2022-11-14', 28, 'Excedrine.jfif'),
-(33, 'ZZZQuil', 'Vicks', 'Insomnia', '22.00', 'N', 'N', '2022-11-28', 22, 'ZZZQuil.jfif');
+(32, 'Excedrin', 'Excedrin', 'Migraine', '18.00', 'N', 'N', '2022-11-14', 25, 'Excedrine.jfif'),
+(33, 'ZZZQuil', 'Vicks', 'Insomnia', '22.00', 'N', 'N', '2022-11-28', 17, 'ZZZQuil.jfif'),
+(35, 'TestProduct', 'TestComp', 'test', '5.99', 'Y', 'N', '2022-12-22', 60, 'abc.jpg');
 
 -- --------------------------------------------------------
 
@@ -196,7 +243,8 @@ INSERT INTO `userdetails` (`ID`, `UserID`, `FirstName`, `LastName`, `Gender`, `P
 (25, 'mpalkar@gmail.com', 'Mithila', 'Palkar', 'Female', 'a1Bz20ydqelm8m1wql24cf6b88f3ebbe637bd60f0bf442f354', 'arch1-poster_06-03.png', '1992-11-15'),
 (27, 'testuser@gmail.com', 'test', 'test', 'Male', 'a1Bz20ydqelm8m1wql5f4dcc3b5aa765d61d8327deb882cf99', 'test.jpg', '0000-00-00'),
 (28, 'mGrey@gmail.com', 'Meredith', 'Grey', 'Female', 'a1Bz20ydqelm8m1wqle22d0ccac500fc266e031e510689e0fa', 'ZZZQuil.jfif', '0000-00-00'),
-(29, 'alexkarev@gmail.com', 'Alex', 'Karev', 'Male', 'a1Bz20ydqelm8m1wql76cfeea3722990da7969780a1eaff957', 'Sravani_Transcripts.pdf', '0000-00-00');
+(29, 'alexkarev@gmail.com', 'Alex', 'Karev', 'Male', 'a1Bz20ydqelm8m1wql76cfeea3722990da7969780a1eaff957', 'Sravani_Transcripts.pdf', '0000-00-00'),
+(30, 'aarthisingh19399@gmail.com', 'aarthi', 'singh', 'Female', 'a1Bz20ydqelm8m1wqlc6346db6e58d7cfad6f6b52c2714c23f', 'receipt3.gif', '0000-00-00');
 
 --
 -- Indexes for dumped tables
@@ -219,6 +267,12 @@ ALTER TABLE `docdetails`
 --
 ALTER TABLE `order details`
   ADD PRIMARY KEY (`OrderID`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`payment_id`);
 
 --
 -- Indexes for table `products`
@@ -246,19 +300,25 @@ ALTER TABLE `docdetails`
 -- AUTO_INCREMENT for table `order details`
 --
 ALTER TABLE `order details`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `userdetails`
 --
 ALTER TABLE `userdetails`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
