@@ -156,8 +156,8 @@
                       $result = mysqli_query($dbConnection,"SELECT sum(TotalPrice) FROM `order details` WHERE UserID='$user_id' and OrderStatus='Cart'");
                       while($row3 = mysqli_fetch_array($result))
                         { 
-                        echo '$'.$row3['sum(TotalPrice)'];
-                        echo '<input type="hidden" name="total" value="'.$row3['sum(TotalPrice)'].'">';
+                        echo '$'.number_format($row3['sum(TotalPrice)'], 2, '.', '');
+                        echo '<input type="hidden" name="total" value="'.number_format($row3['sum(TotalPrice)'], 2, '.', '').'">';
                         }
                       ?></strong>
                   </td>

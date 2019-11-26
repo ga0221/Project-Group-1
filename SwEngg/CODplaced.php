@@ -69,7 +69,7 @@
   <!-- End Navbar -->
   
   <?php
-    
+    $track_num = $_GET['tID'];
 	class OrderPlaced{
 		
 		function generateTrackingNumber(){
@@ -98,7 +98,7 @@
 
            $total = $cart_row['sum(TotalPrice)'];
            $date = date("Y-m-d H:i:s");
-           $track_num= uniqid();
+           $track_num= $_GET['tID'];
            $StreetAddr=$cart_row['Street Address'];
            $County=$cart_row['County'];
 		   $City=$cart_row['City'];
@@ -107,7 +107,7 @@
            $ship_add=$StreetAddr .' '. $County .' '.$City .' '. $State .' '. $ZipCode;    
 		   echo "<br><br><br>";
 		   echo '<center><strong><span style ="color:#FF0000;">********* Your tracking number: '.$track_num.' | </span></strong></center>';
-           echo '<center><strong><span style ="color:#FF0000;">Total: $'.$total.' | </span></strong></center>';
+           echo '<center><strong><span style ="color:#FF0000;">Total: $'.number_format($total, 2, '.', '').' | </span></strong></center>';
 		   echo '<center><strong><span style ="color:#FF0000;">Payment type: Cash On Delivery</span></strong></center>';
            echo '<center><strong><span style ="color:#FF0000;">Shipping Address: '.$ship_add.' *********</span></strong></center>';
 		   //For Test Cases
@@ -122,6 +122,84 @@
 	
 	$order = new OrderPlaced;
 	$order->generateTrackingNumber();
+	
+	$ProductID = 0;
+	 $ProductName = '';
+	 $ProductQuantity = 0;
+	 $userId = $_SESSION['id'];
+    $query = mysqli_query($dbConnection,"SELECT * FROM `order details` WHERE UserID='$userId' AND OrderStatus='Placed' AND `TrackingNumber` ='$track_num'");
+			while($row3 = mysqli_fetch_array($query)) {
+				$ProductID=$row3['ProductID'];
+				$UserID=$row3['UserID'];
+				$ProductQuantity= $row3['ProductQuantity'];
+				$ProductName=$row3['ProductName'];
+			}
+    
+    $cart_table = mysqli_query($dbConnection,"SELECT sum(TotalPrice),`Street Address`,`County`,`City`,`State`,`ZipCode` FROM `order details` WHERE UserID='$userId' AND OrderStatus='Placed' AND `TrackingNumber` ='$track_num'");
+				   //$cart_count = mysqli_num_rows($cart_table);
+        $total = 0;
+		$ship_add = '';
+        while ($cart_row = mysqli_fetch_array($cart_table)) {
+
+           $total = $cart_row['sum(TotalPrice)'];
+           $date = date("Y-m-d H:i:s");
+           //$track_num= uniqid();
+           $StreetAddr=$cart_row['Street Address'];
+           $County=$cart_row['County'];
+		   $City=$cart_row['City'];
+		   $State=$cart_row['State'];
+		   $ZipCode=$cart_row['ZipCode'];
+           $ship_add=$StreetAddr .' '. $County .' '.$City .' '. $State .' '. $ZipCode;    
+		}
+
+		$UserID = $userId;
+
+		$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+			$headers .= 'From: <medanytimeonline2019@gmail.com>' . "\r\n";
+			
+			$subject = "Order Details";
+			
+			$message = "<html> 
+			<p>
+			
+			Hello, <br> You have ordered some products on our website Med-AnyTime.com, please find your order details, your order will be processed shortly. Thank you!</p>
+			
+				<table width='600' align='center'  border='2'>
+			
+					<tr align='center'><td colspan='6'><h2>Your Order Details from Med-AnyTime.com</h2></td></tr>
+					
+					<tr align='center'>
+		                <th><b>Product ID</b></th>
+						<th><b>Product Name</b></th>
+						<th><b>Product Quantity</b></th>
+						<th><b>Total Amount</th></th>
+						<th><b>Tracking Number</b></th>
+						<th><b>Shipping Address</b></th>
+					</tr>
+					<tr align='center'>
+						<td>$ProductID</td>
+						<td>$ProductName</td>
+						<td>$ProductQuantity</td>
+						<td>$total</td>
+						<td>$track_num</td>
+						<td>$ship_add</td>
+					</tr>
+					
+					
+			
+				</table>
+				
+				<h3>Please go to your account and see your order details!</h3>
+				
+				<h3> Thank you for your order @ - www.Med-AnyTime.com</h3>
+				
+			</html>
+			
+			";
+			
+			mail($UserID,$subject,$message,$headers);
+	
 	
 
 ?>

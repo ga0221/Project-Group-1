@@ -107,7 +107,7 @@
 					
                     <!-- Display the payment button. -->
                     <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal"><br>
-					<a href="CODplaced.php"><button type="button" class="btn btn-warning btn-round" ><span class="now-ui-icons ui-1_check"></span> Buy Now with COD</button></a> 
+					<a href="CODplaced.php?tID=<?php echo $trackingNum;?>"><button type="button" class="btn btn-warning btn-round" ><span class="now-ui-icons ui-1_check"></span> Buy Now with COD</button></a> 
                 </form>
    
 </body>
